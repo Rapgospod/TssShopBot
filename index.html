@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Ton Secret Shop</title>
+
+  <!-- Telegram WebApp -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    :root{
+      --bg0:#07060a;
+      --bg1:#0b0a12;
+      --card:#141225;
+      --card2:#0f0e1b;
+      --text:#f1f1ff;
+      --muted:#b7b5d4;
+      --stroke:rgba(255,255,255,.10);
+      --shadow: 0 18px 48px rgba(0,0,0,.55);
+
+      /* под твой аватар: фиолетовый + голубой неон */
+      --p1:#7c3aed;  /* purple */
+      --p2:#22d3ee;  /* cyan */
+      --p3:#a78bfa;  /* soft purple */
+      --good:#38f9a5;
+      --warn:#ffd54a;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 50% -10%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(700px 460px at 80% 10%, rgba(34,211,238,.18), transparent 55%),
+        radial-gradient(900px 600px at 30% 120%, rgba(167,139,250,.16), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height:100vh;
+      padding: 16px 14px 90px;
+      display:flex;
+      justify-content:center;
+    }
+    .wrap{ width:min(460px,100%); }
+
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .logo{
+      width:46px;height:46px;
+      border-radius:16px;
+      background: rgba(255,255,255,.05);
+      border:1px solid var(--stroke);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      overflow:hidden;
+      flex:0 0 auto;
+      display:grid;place-items:center;
+    }
+    .logo img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .titleWrap{ min-width:0; }
+    .title{
+      margin:0;
+      font-weight:900;
+      font-size:16px;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .sub{
+      margin:4px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      font-size:12px;
+      color:#e8e7ff;
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+      white-space:nowrap;
+    }
+
+    .tabs{
+      display:flex;
+      gap:8px;
+      padding:8px;
+      border-radius:18px;
+      background: rgba(255,255,255,.05);
+      border:1px solid var(--stroke);
+      box-shadow: 0 12px 34px rgba(0,0,0,.35);
+      margin-bottom:12px;
+      position:sticky;
+      top:10px;
+      backdrop-filter: blur(10px);
+      z-index:2;
+    }
+    .tab{
+      flex:1;
+      border:none;
+      background: transparent;
+      color: rgba(241,241,255,.78);
+      font-weight:800;
+      padding:10px 10px;
+      border-radius:14px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .tab.active{
+      color: var(--text);
+      background: linear-gradient(90deg, rgba(124,58,237,.35), rgba(34,211,238,.18));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 16px 44px rgba(124,58,237,.16);
+    }
+
+    .card{
+      border-radius:20px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      backdrop-filter: blur(10px);
+      margin-bottom:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+
+    .service{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .icon{
+      width:44px;height:44px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(124,58,237,.22), rgba(34,211,238,.10));
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      box-shadow: 0 16px 44px rgba(0,0,0,.35);
+    }
+    .icon svg{ width:22px;height:22px; opacity:.95; }
+
+    .service h3{
+      margin:0;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .service p{
+      margin:6px 0 0;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.35;
+    }
+
+    .thumb{
+      margin-top:10px;
+      width:100%;
+      height:140px;
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,.18);
+      background:
+        radial-gradient(500px 200px at 30% 0%, rgba(124,58,237,.18), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      display:grid;
+      place-items:center;
+      color: rgba(241,241,255,.58);
+      font-size:12px;
+      overflow:hidden;
+    }
+    .thumb img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .btn{
+      border:none;
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+      padding:12px 14px;
+      border-radius:16px;
+      color:#05050a;
+      background: linear-gradient(90deg, rgba(124,58,237,1), rgba(34,211,238,1));
+      box-shadow: 0 16px 44px rgba(124,58,237,.20);
+      flex: 1 1 160px;
+    }
+    .btn.secondary{
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border:1px solid var(--stroke);
+      box-shadow:none;
+    }
+    .btn:active{ transform: scale(0.99); }
+
+    .note{
+      margin-top:10px;
+      font-size:12px;
+      color: rgba(241,241,255,.72);
+      line-height:1.4;
+    }
+
+    /* Portfolio grid */
+    .portfolioGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .work{
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,.18);
+      background: rgba(255,255,255,.04);
+      height:130px;
+      display:grid;
+      place-items:center;
+      color: rgba(241,241,255,.58);
+      font-size:12px;
+      overflow:hidden;
+    }
+    .work img{ width:100%;height:100%;object-fit:cover;display:block; }
+
+    /* sections */
+    .screen{ display:none; }
+    .screen.active{ display:block; }
+
+    /* tiny footer info */
+    .foot{
+      margin-top:6px;
+      font-size:11px;
+      color: rgba(241,241,255,.55);
+    }
+
+    /* small link button */
+    .link{
+      color: var(--p2);
+      text-decoration:none;
+      font-weight:800;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="logo" title="Upload logo.png to repo">
+          <!-- положи logo.png рядом с index.html -->
+          <img src="logo.png" alt="Ton Secret Shop logo" onerror="this.style.display='none'; this.parentElement.textContent='🟣';" />
+        </div>
+        <div class="titleWrap">
+          <p class="title" id="shopName">Ton Secret Shop</p>
+          <p class="sub" id="helloLine">Design services • Web3 vibe</p>
+        </div>
+      </div>
+      <div class="pill" id="envPill">tg mini app</div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="services">Услуги</button>
+      <button class="tab" data-tab="portfolio">Портфолио</button>
+      <button class="tab" data-tab="order">Заказ</button>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="screen active" id="services">
+      <div class="card">
+        <div class="note">
+          Выбери услугу → нажми “Заказать” → откроется чат с ботом и готовым текстом заявки.
+          <div class="foot">Прайс вставим после того, как ты скинешь прайслист.</div>
+        </div>
+      </div>
+
+      <div class="grid">
+
+        <!-- 1 -->
+        <div class="card">
+          <div class="service">
+            <div class="icon" aria-hidden="true">
+              <!-- stickers icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 3h7a7 7 0 0 1 7 7v7a4 4 0 0 1-4 4H10a7 7 0 0 1-7-7V7a4 4 0 0 1 4-4Z" stroke="white" opacity="0.9" stroke-width="1.7"/>
+                <path d="M14 3v5a4 4 0 0 0 4 4h5" stroke="white" opacity="0.9" stroke-width="1.7"/>
+                <path d="M8 14c1.2 1.2 2.5 1.8 4 1.8S14.8 15.2 16 14" stroke="white" opacity="0.9" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M9 10h.01M15 10h.01" stroke="white" opacity="0.9" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>⭐️ Стикеры / Emoji</h3>
+              <p>Статичные и анимированные (включая .tgs). Под Telegram, под стиль проекта.</p>
+              <div class="thumb" id="thumb-stickers">
+                <!-- позже просто заменишь на <img src="service-stickers.jpg"> -->
+                Место под примеры (фото/гиф)
+              </div>
+              <div class="row">
+                <button class="btn" data-order="Стикеры/Emoji">Заказать</button>
+                <button class="btn secondary" data-more="Стикеры/Emoji">Подробнее</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="card">
+          <div class="service">
+            <div class="icon" aria-hidden="true">
+              <!-- branding icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 7.5A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5v9A3.5 3.5 0 0 1 16.5 20h-9A3.5 3.5 0 0 1 4 16.5v-9Z" stroke="white" opacity="0.9" stroke-width="1.7"/>
+                <path d="M8 16l2.2-2.2a2 2 0 0 1 2.8 0L16 16" stroke="white" opacity="0.9" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M9 9h6" stroke="white" opacity="0.9" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>🌸 Дизайн проекта</h3>
+              <p>Обои, аватар, баннер, обложки, оформление Telegram/соцсетей, стиль-система.</p>
+              <div class="thumb" id="thumb-branding">Место под примеры (фото)</div>
+              <div class="row">
+                <button class="btn" data-order="Дизайн проекта">Заказать</button>
+                <button class="btn secondary" data-more="Дизайн проекта">Подробнее</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="card">
+          <div class="service">
+            <div class="icon" aria-hidden="true">
+              <!-- motion icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v11A2.5 2.5 0 0 1 16.5 20h-9A2.5 2.5 0 0 1 5 17.5v-11Z" stroke="white" opacity="0.9" stroke-width="1.7"/>
+                <path d="M11 9l5 3-5 3V9Z" fill="white" opacity="0.9"/>
+              </svg>
+            </div>
+            <div>
+              <h3>🎬 Анимация</h3>
+              <p>Логотип/интро, промо-ролики, лупы, анимации под Telegram и соцсети.</p>
+              <div class="thumb" id="thumb-motion">Место под примеры (gif/video)</div>
+              <div class="row">
+                <button class="btn" data-order="Анимация">Заказать</button>
+                <button class="btn secondary" data-more="Анимация">Подробнее</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="card">
+          <div class="service">
+            <div class="icon" aria-hidden="true">
+              <!-- web3 icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3l8 5v8l-8 5-8-5V8l8-5Z" stroke="white" opacity="0.9" stroke-width="1.7"/>
+                <path d="M12 3v18" stroke="white" opacity="0.35" stroke-width="1.2"/>
+                <path d="M4 8l8 5 8-5" stroke="white" opacity="0.9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>💎 Web3 / NFT дизайн</h3>
+              <p>Коллекции, постеры, баннеры, карточки, мерч-визуалы, упаковка под запуск.</p>
+              <div class="thumb" id="thumb-web3">Место под примеры</div>
+              <div class="row">
+                <button class="btn" data-order="Web3 / NFT дизайн">Заказать</button>
+                <button class="btn secondary" data-more="Web3 / NFT дизайн">Подробнее</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="screen" id="portfolio">
+      <div class="card">
+        <div class="note">
+          Тут будет витрина кейсов. Пока плейсхолдеры — потом просто загрузишь картинки и заменишь src.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="portfolioGrid">
+          <div class="work">Work #1</div>
+          <div class="work">Work #2</div>
+          <div class="work">Work #3</div>
+          <div class="work">Work #4</div>
+          <div class="work">Work #5</div>
+          <div class="work">Work #6</div>
+        </div>
+        <div class="note">Хочешь — сделаем открытие карточки кейса на весь экран (как Behance).</div>
+      </div>
+    </section>
+
+    <!-- ORDER -->
+    <section class="screen" id="order">
+      <div class="card">
+        <h3 style="margin:0 0 8px;font-size:14px;font-weight:900">Как заказать</h3>
+        <div class="note" style="margin-top:0">
+          1) Выбери услугу<br/>
+          2) Нажми “Заказать” — откроется чат с ботом с текстом заявки<br/>
+          3) Мы уточним детали и сроки
+        </div>
+
+        <div class="row">
+          <button class="btn" id="openBotBtn">Открыть чат с ботом</button>
+          <button class="btn secondary" id="copyTemplateBtn">Скопировать шаблон заявки</button>
+        </div>
+
+        <div class="note">
+          <b>Шаблон заявки:</b><br/>
+          Услуга: …<br/>
+          Стиль/референсы: …<br/>
+          Кол-во/формат: …<br/>
+          Дедлайн: …<br/>
+          Бюджет: …<br/>
+        </div>
+
+        <div class="foot" style="margin-top:10px">
+          Важно: чтобы кнопка “Открыть чат” работала, вставь username бота в код (ниже покажу где).
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0 0 8px;font-size:14px;font-weight:900">.tgs анимации в аппке</h3>
+        <div class="note" style="margin-top:0">
+          Да, можно. Но .tgs — это <b>gzip Lottie</b>. Для проигрывания обычно подключают <b>lottie-web</b> + распаковку (pako).<br/>
+          Я оставил ниже готовую заготовку-код (выключена по умолчанию), включим когда ты будешь готов.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // --- Telegram init
+    const tg = window.Telegram?.WebApp;
+    if (tg) tg.expand();
+
+    const envPill = document.getElementById("envPill");
+    envPill.textContent = tg ? "tg mini app" : "browser preview";
+
+    // приветствие (если внутри Telegram)
+    const helloLine = document.getElementById("helloLine");
+    const u = tg?.initDataUnsafe?.user;
+    if (u?.first_name) helloLine.textContent = `Hi, ${u.first_name} • Design services • Web3 vibe`;
+
+    // --- Tabs
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+    const screens = {
+      services: document.getElementById("services"),
+      portfolio: document.getElementById("portfolio"),
+      order: document.getElementById("order"),
+    };
+
+    function setTab(name){
+      tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+      Object.entries(screens).forEach(([k, el]) => el.classList.toggle("active", k === name));
+      try { tg?.HapticFeedback?.impactOccurred("light"); } catch(e){}
+    }
+
+    tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
+
+    // --- Order logic
+    // ВАЖНО: впиши сюда username своего бота без @, например "tonsecretshop_bot"
+    const BOT_USERNAME = "YOUR_BOT_USERNAME_HERE";
+
+    function buildOrderText(serviceName){
+      return [
+        "🛒 Заявка Ton Secret Shop",
+        "Услуга: " + serviceName,
+        "Стиль/референсы: ",
+        "Кол-во/формат: ",
+        "Дедлайн: ",
+        "Бюджет: ",
+      ].join("\n");
+    }
+
+    function openChatWithText(text){
+      // Работает без бекенда: открывает шаринг сообщения в Telegram
+      const url = "https://t.me/share/url?url=&text=" + encodeURIComponent(text);
+      if (tg?.openTelegramLink) tg.openTelegramLink(url);
+      else window.open(url, "_blank");
+    }
+
+    // кнопки "Заказать" на карточках услуг
+    document.querySelectorAll("[data-order]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const serviceName = btn.dataset.order;
+        const text = buildOrderText(serviceName);
+        openChatWithText(text);
+      });
+    });
+
+    // "Подробнее" — пока просто уведомление
+    document.querySelectorAll("[data-more]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const name = btn.dataset.more;
+        alert("Скоро тут будет описание услуги и примеры: " + name);
+      });
+    });
+
+    // Вкладка Заказ: открыть чат с ботом (если хочешь именно чат с ботом)
+    document.getElementById("openBotBtn").addEventListener("click", () => {
+      if (!BOT_USERNAME || BOT_USERNAME.includes("YOUR_BOT_USERNAME")) {
+        alert("Впиши username бота в код: BOT_USERNAME = \"...\"");
+        return;
+      }
+      const url = "https://t.me/" + BOT_USERNAME;
+      if (tg?.openTelegramLink) tg.openTelegramLink(url);
+      else window.open(url, "_blank");
+    });
+
+    // Скопировать шаблон
+    document.getElementById("copyTemplateBtn").addEventListener("click", async () => {
+      const template = buildOrderText("...");
+      try{
+        await navigator.clipboard.writeText(template);
+        alert("Шаблон скопирован ✅");
+      }catch(e){
+        alert("Не получилось скопировать. Скопируй вручную:\n\n" + template);
+      }
+    });
+
+    // --- OPTIONAL: .tgs support (позже включим)
+    // Как это делается:
+    // 1) Подключаем lottie-web и pako:
+    //    <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+    //    <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+    // 2) Загружаем .tgs (это gzip), распаковываем pako.ungzip, парсим JSON, и отдаём lottie.loadAnimation({animationData: json})
+    //
+    // Если хочешь — на следующем шаге я вставлю рабочий пример "Sticker Preview" на карточке услуги.
+
+  </script>
+</body>
+</html>
