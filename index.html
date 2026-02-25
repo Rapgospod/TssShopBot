@@ -110,7 +110,19 @@
       border-radius:16px;
       cursor:pointer;
       font-size:13px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
       position:relative;
+    }
+    .tab .dot{
+      width:10px;height:10px;
+      border-radius:3px;
+      background: rgba(255,255,255,.00);
+      border:1px solid rgba(255,255,255,.00);
+      flex: 0 0 auto;
     }
     .tab.active{
       color: var(--text);
@@ -118,16 +130,7 @@
       border:1px solid rgba(255,255,255,.10);
       box-shadow: 0 16px 44px rgba(124,58,237,.16);
     }
-    /* ✅ квадрат-индикатор активной вкладки */
-    .tab.active::after{
-      content:"";
-      position:absolute;
-      right:10px;
-      top:50%;
-      width:10px;
-      height:10px;
-      border-radius:3px;
-      transform: translateY(-50%);
+    .tab.active .dot{
       background: rgba(255,255,255,.35);
       border:1px solid rgba(255,255,255,.22);
       box-shadow: 0 10px 22px rgba(0,0,0,.25);
@@ -174,7 +177,7 @@
     .service h3{ margin:0; font-size:14px; font-weight:900; letter-spacing:.2px; }
     .service p{ margin:6px 0 0; color: var(--muted); font-size:12px; line-height:1.35; }
 
-    /* ✅ квадратные превью-блоки */
+    /* square preview */
     .thumb{
       margin-top:10px;
       width:100%;
@@ -190,7 +193,13 @@
       font-size:12px;
       overflow:hidden;
     }
-    .thumb img{ width:100%;height:100%;object-fit:cover;display:block; }
+    .thumb img, .thumb video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      border-radius:16px;
+    }
 
     /* price options */
     .priceTitle{
@@ -258,7 +267,6 @@
       grid-template-columns: 1fr 1fr;
       gap:10px;
     }
-    /* ✅ квадратные, кликабельные */
     .work{
       border-radius:16px;
       border:1px dashed rgba(255,255,255,.18);
@@ -313,7 +321,7 @@
     .modal p{ margin:6px 0 0; color:rgba(241,241,255,.75); font-size:12px; line-height:1.4; }
     .modal a{ color: var(--p2); font-weight:900; text-decoration:none; }
 
-    /* ✅ Splash loading */
+    /* SPLASH */
     #splash{
       position:fixed;
       inset:0;
@@ -325,11 +333,47 @@
         radial-gradient(700px 460px at 80% 10%, rgba(34,211,238,.20), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       z-index:100;
+      overflow:hidden;
     }
+    /* star layer */
+    #splash::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.80), transparent 60%),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,.70), transparent 60%),
+        radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,.50), transparent 60%),
+        radial-gradient(2px 2px at 45% 55%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(1px 1px at 55% 10%, rgba(255,255,255,.60), transparent 60%),
+        radial-gradient(1px 1px at 15% 65%, rgba(255,255,255,.45), transparent 60%),
+        radial-gradient(2px 2px at 85% 15%, rgba(255,255,255,.28), transparent 60%),
+        radial-gradient(1px 1px at 65% 85%, rgba(255,255,255,.42), transparent 60%);
+      opacity:.55;
+      filter: blur(.2px);
+      transform: rotate(-6deg);
+      pointer-events:none;
+      animation: starDrift 8s ease-in-out infinite alternate;
+    }
+    @keyframes starDrift{
+      from{ transform: translateY(-10px) rotate(-6deg); opacity:.45; }
+      to{ transform: translateY(10px) rotate(-6deg); opacity:.65; }
+    }
+
+    #splash.fadeOut{
+      animation: splashFade .55s ease forwards;
+    }
+    @keyframes splashFade{
+      to{ opacity:0; transform: scale(1.02); }
+    }
+
     .splashBox{
       width:min(360px, 90vw);
       text-align:center;
       padding: 18px 16px 16px;
+      position:relative;
+      z-index:2;
     }
     .sLogo{
       width:92px;height:92px;
@@ -351,7 +395,7 @@
     }
     .sBar{
       height: 14px;
-      border-radius: 999px; /* округлый как кнопки */
+      border-radius: 999px;
       background: rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.12);
       overflow:hidden;
@@ -361,11 +405,39 @@
       height:100%;
       width: 0%;
       border-radius: 999px;
-      /* серый 1% -> белый 100% */
-      background: linear-gradient(90deg, rgba(170,170,170,.70), rgba(255,255,255,.95));
-      animation: loadingFill var(--loadDur) linear forwards;
+
+      /* тёмно-серый -> белый */
+      background: linear-gradient(90deg,
+        rgba(65,65,72,.95),
+        rgba(120,120,135,.85),
+        rgba(255,255,255,.95)
+      );
+
+      position:relative;
+      overflow:hidden;
+
+      animation:
+        loadingFill var(--loadDur) linear forwards,
+        fillToWhite var(--loadDur) linear forwards;
+    }
+    .sFill::after{
+      content:"";
+      position:absolute;
+      inset:-40% -30%;
+      background: radial-gradient(closest-side, rgba(255,255,255,.40), transparent 65%);
+      transform: translateX(-40%) rotate(12deg);
+      animation: sheen 1.2s ease-in-out infinite;
+      opacity:.55;
     }
     @keyframes loadingFill { to { width: 100%; } }
+    @keyframes sheen{
+      0%{ transform: translateX(-40%) rotate(12deg); }
+      100%{ transform: translateX(140%) rotate(12deg); }
+    }
+    @keyframes fillToWhite{
+      0%, 85% { filter: brightness(1); }
+      100% { filter: brightness(1.35); }
+    }
 
     .sHint{
       margin-top:10px;
@@ -382,9 +454,9 @@
       <div class="sLogo">
         <img src="logo.png" alt="logo" onerror="this.style.display='none'; this.parentElement.textContent='🟣';" />
       </div>
-      <p class="sText">Loading Ton Secret Shop…</p>
+      <p class="sText">Welcome to TonSecretShop</p>
       <div class="sBar"><div class="sFill"></div></div>
-      <div class="sHint">please wait</div>
+      <div class="sHint">Preparing experience…</div>
     </div>
   </div>
 
@@ -400,13 +472,13 @@
           <p class="sub" id="helloLine">Design services • Web3 vibe</p>
         </div>
       </div>
-      <!-- ❌ убрали плашку tg mini app по твоей правке -->
+      <!-- убрали tg mini app -->
     </div>
 
     <div class="tabs" role="tablist">
-      <button class="tab active" data-tab="services">Услуги</button>
-      <button class="tab" data-tab="portfolio">Портфолио</button>
-      <button class="tab" data-tab="order">Заказ</button>
+      <button class="tab active" data-tab="services"><span>Услуги</span><span class="dot"></span></button>
+      <button class="tab" data-tab="portfolio"><span>Портфолио</span><span class="dot"></span></button>
+      <button class="tab" data-tab="order"><span>Заказ</span><span class="dot"></span></button>
     </div>
 
     <!-- SERVICES -->
@@ -434,7 +506,7 @@
               <h3>⭐️ Стикеры / Emoji</h3>
               <p>Статичные и анимированные. Под Telegram, под стиль проекта.</p>
 
-              <div class="thumb" data-thumb="stickers">Место под примеры (фото/гиф)</div>
+              <div class="thumb">Место под примеры (фото/гиф)</div>
 
               <div class="priceTitle">Варианты:</div>
               <div class="options" data-options>
@@ -466,7 +538,7 @@
               <h3>🌸 Дизайн проекта</h3>
               <p>Обои, аватар, оформление Telegram/соцсетей, баннеры.</p>
 
-              <div class="thumb" data-thumb="design">Место под примеры (фото)</div>
+              <div class="thumb">Место под примеры (фото)</div>
 
               <div class="priceTitle">Варианты:</div>
               <div class="options" data-options>
@@ -496,7 +568,7 @@
               <h3>🎬 Анимация</h3>
               <p>Лупы, интро, промо, анимации под Telegram/соцсети.</p>
 
-              <div class="thumb" data-thumb="motion">Место под примеры (gif/video)</div>
+              <div class="thumb">Место под примеры (gif/video)</div>
 
               <div class="priceTitle">Варианты:</div>
               <div class="options" data-options>
@@ -529,7 +601,7 @@
               <h3>💎 Web3 / NFT дизайн</h3>
               <p>Коллекции, постеры, баннеры, карточки, мерч-визуалы. Цена обсуждается индивидуально.</p>
 
-              <div class="thumb" data-thumb="web3">Место под примеры</div>
+              <div class="thumb">Место под примеры</div>
 
               <div class="priceTitle">Варианты:</div>
               <div class="options" data-options>
@@ -557,7 +629,7 @@
 
       <div class="card">
         <div class="portfolioGrid">
-          <div class="work" data-work-title="Work #1" data-work-desc="Описание кейса + ссылки" data-work-link="">
+          <div class="work" data-work-title="Стикеры статичные" data-work-desc="Тут будет описание кейса + ссылки на стикер/канал." data-work-link="">
             Work #1
           </div>
           <div class="work" data-work-title="Work #2" data-work-desc="Описание кейса + ссылки" data-work-link="">
@@ -576,7 +648,7 @@
             Work #6
           </div>
         </div>
-        <div class="foot">Дальше можем сделать категории (стикеры/баннеры/анимации) и фильтр.</div>
+        <div class="foot">Дальше можем сделать категории и фильтр.</div>
       </div>
     </section>
 
@@ -608,15 +680,20 @@
         <div class="foot">Бот: @TSS_SHOPbot</div>
       </div>
 
-      <!-- ✅ нижняя квадратная гифка -->
       <div class="card">
-        <div class="note" style="margin:0 0 10px">Нижний промо-блок (квадратная GIF). Залей файл <b>promo.gif</b> рядом с index.html.</div>
-        <div class="thumb">
-  <video autoplay loop muted playsinline 
-         style="width:100%;height:100%;object-fit:cover;display:block;border-radius:16px;">
-    <source src="promo.mp4" type="video/mp4">
-  </video>
-</div>
+        <div class="note" style="margin:0 0 10px">
+          Промо-блок: загрузи <b>promo.mp4</b> (или запасной <b>promo.gif</b>) рядом с index.html
+        </div>
+
+        <div class="thumb" style="padding:0;">
+          <video id="promoVid" autoplay loop muted playsinline preload="auto">
+            <source src="promo.mp4" type="video/mp4">
+          </video>
+
+          <img id="promoGif" src="promo.gif" alt="promo" style="display:none;" />
+
+          <div id="promoFallback" style="display:none; padding:14px;">promo.mp4 (placeholder)</div>
+        </div>
       </div>
     </section>
   </div>
@@ -639,20 +716,26 @@
     const tg = window.Telegram?.WebApp;
     if (tg) tg.expand();
 
-    // приветствие в шапке
+    // ===== Splash duration (random 4-8 sec)
+    const splash = document.getElementById("splash");
+    const dur = (Math.floor(Math.random() * 5) + 4); // 4..8
+    if (splash) splash.style.setProperty("--loadDur", dur + "s");
+    const SPLASH_MS = dur * 1000;
+
+    setTimeout(() => {
+      const s = document.getElementById("splash");
+      if (!s) return;
+      s.classList.add("fadeOut");
+      setTimeout(()=> s.style.display="none", 600);
+    }, SPLASH_MS);
+
+    // greeting
     const u = tg?.initDataUnsafe?.user;
     if (u?.first_name) {
       document.getElementById("helloLine").textContent = `Hi, ${u.first_name} • Design services • Web3 vibe`;
     }
 
-    // ✅ Splash duration: поставь 4000..8000 если нужно
-    const SPLASH_MS = 6000; // 6 секунд (в твоём диапазоне 4–8)
-    setTimeout(() => {
-      const s = document.getElementById("splash");
-      if (s) s.style.display = "none";
-    }, SPLASH_MS);
-
-    // Tabs
+    // ===== Tabs
     const tabs = Array.from(document.querySelectorAll(".tab"));
     const screens = {
       services: document.getElementById("services"),
@@ -667,7 +750,7 @@
     }
     tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
 
-    // Bot username (без @)
+    // ===== Bot
     const BOT_USERNAME = "TSS_SHOPbot";
 
     function buildOrderText(serviceName, optionText){
@@ -682,13 +765,18 @@
       ].join("\n");
     }
 
+    // ПК/desktop надежнее через location
     function openShare(text){
       const url = "https://t.me/share/url?url=&text=" + encodeURIComponent(text);
-      if (tg?.openTelegramLink) tg.openTelegramLink(url);
-      else window.open(url, "_blank");
+      try{
+        if (tg?.openTelegramLink) tg.openTelegramLink(url);
+        else window.location.href = url;
+      }catch(e){
+        window.location.href = url;
+      }
     }
 
-    // Options logic per service card
+    // options per card
     document.querySelectorAll("[data-options]").forEach(optWrap => {
       const opts = Array.from(optWrap.querySelectorAll(".opt"));
       opts.forEach(btn => {
@@ -699,7 +787,7 @@
       });
     });
 
-    // Order buttons inside cards
+    // order buttons
     document.querySelectorAll("[data-order]").forEach(btn => {
       btn.addEventListener("click", () => {
         const card = btn.closest(".card");
@@ -710,18 +798,23 @@
       });
     });
 
-    // More
+    // more
     document.querySelectorAll("[data-more]").forEach(btn => {
-      btn.addEventListener("click", () => alert("Это подробное описание и примеры:? " + btn.dataset.more));
+      btn.addEventListener("click", () => alert("Скоро добавим подробное описание и примеры: " + btn.dataset.more));
     });
 
-    // Order tab buttons
+    // open bot
     document.getElementById("openBotBtn").addEventListener("click", () => {
       const url = "https://t.me/" + BOT_USERNAME;
-      if (tg?.openTelegramLink) tg.openTelegramLink(url);
-      else window.open(url, "_blank");
+      try{
+        if (tg?.openTelegramLink) tg.openTelegramLink(url);
+        else window.location.href = url;
+      }catch(e){
+        window.location.href = url;
+      }
     });
 
+    // copy template
     document.getElementById("copyTemplateBtn").addEventListener("click", async () => {
       const template = buildOrderText("…", "…");
       try{
@@ -732,7 +825,39 @@
       }
     });
 
-    // Portfolio modal
+    // ===== Promo mp4 fallback -> gif -> placeholder
+    (function(){
+      const v = document.getElementById("promoVid");
+      const g = document.getElementById("promoGif");
+      const f = document.getElementById("promoFallback");
+      if (!v) return;
+
+      const failToGif = () => {
+        v.style.display = "none";
+        if (g) g.style.display = "block";
+        if (f) f.style.display = "none";
+      };
+
+      v.addEventListener("error", () => {
+        failToGif();
+        // если и gif не загрузится — покажем placeholder
+        if (g){
+          g.onerror = () => {
+            g.style.display = "none";
+            if (f){ f.style.display = "grid"; f.style.placeItems="center"; }
+          };
+        } else if (f){
+          f.style.display = "grid"; f.style.placeItems="center";
+        }
+      });
+
+      // если autoplay где-то запрещён, попробуем руками
+      v.addEventListener("canplay", async () => {
+        try { await v.play(); } catch(e) {}
+      });
+    })();
+
+    // ===== Portfolio modal
     const backdrop = document.getElementById("backdrop");
     const mTitle = document.getElementById("mTitle");
     const mDesc = document.getElementById("mDesc");
