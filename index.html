@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
   <title>Ton Secret Shop</title>
-
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
@@ -15,11 +14,13 @@
       --muted:#b7b5d4;
       --stroke:rgba(255,255,255,.10);
       --shadow: 0 18px 48px rgba(0,0,0,.55);
-      --radius: 18px;
 
-      --p1:#7c3aed;
-      --p2:#22d3ee;
-      --p3:#a78bfa;
+      --p1:#7c3aed;  /* purple */
+      --p2:#22d3ee;  /* cyan */
+      --p3:#a78bfa;  /* soft purple */
+
+      --cardA: rgba(255,255,255,.06);
+      --cardB: rgba(255,255,255,.03);
     }
 
     *{box-sizing:border-box}
@@ -40,12 +41,13 @@
     }
     .wrap{ width:min(460px,100%); }
 
+    /* Header */
     .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
     .brand{
       display:flex;
@@ -63,11 +65,7 @@
       flex:0 0 auto;
       display:grid;place-items:center;
     }
-    .logo img{
-      width:100%;height:100%;
-      object-fit:cover;
-      display:block;
-    }
+    .logo img{ width:100%;height:100%; object-fit:cover; display:block; }
     .titleWrap{ min-width:0; }
     .title{
       margin:0;
@@ -87,18 +85,7 @@
       text-overflow:ellipsis;
     }
 
-    .pill{
-      padding:8px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid var(--stroke);
-      font-size:12px;
-      color:#e8e7ff;
-      box-shadow: 0 12px 28px rgba(0,0,0,.25);
-      white-space:nowrap;
-      flex:0 0 auto;
-    }
-
+    /* Tabs */
     .tabs{
       display:flex;
       gap:8px;
@@ -118,11 +105,12 @@
       border:none;
       background: transparent;
       color: rgba(241,241,255,.78);
-      font-weight:800;
-      padding:10px 10px;
-      border-radius:14px;
+      font-weight:900;
+      padding:12px 10px;
+      border-radius:16px;
       cursor:pointer;
       font-size:13px;
+      position:relative;
     }
     .tab.active{
       color: var(--text);
@@ -130,15 +118,42 @@
       border:1px solid rgba(255,255,255,.10);
       box-shadow: 0 16px 44px rgba(124,58,237,.16);
     }
+    /* ✅ квадрат-индикатор активной вкладки */
+    .tab.active::after{
+      content:"";
+      position:absolute;
+      right:10px;
+      top:50%;
+      width:10px;
+      height:10px;
+      border-radius:3px;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,.35);
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+    }
 
+    /* Cards */
     .card{
       border-radius:20px;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, var(--cardA), var(--cardB));
       border:1px solid var(--stroke);
       box-shadow: var(--shadow);
       padding: 14px;
       backdrop-filter: blur(10px);
       margin-bottom:12px;
+    }
+
+    .note{
+      margin-top:0;
+      font-size:12px;
+      color: rgba(241,241,255,.78);
+      line-height:1.4;
+    }
+    .foot{
+      margin-top:6px;
+      font-size:11px;
+      color: rgba(241,241,255,.55);
     }
 
     .grid{ display:grid; grid-template-columns: 1fr; gap:12px; }
@@ -159,20 +174,53 @@
     .service h3{ margin:0; font-size:14px; font-weight:900; letter-spacing:.2px; }
     .service p{ margin:6px 0 0; color: var(--muted); font-size:12px; line-height:1.35; }
 
+    /* ✅ квадратные превью-блоки */
     .thumb{
       margin-top:10px;
       width:100%;
-      height:140px;
+      aspect-ratio: 1 / 1;
       border-radius:16px;
       border:1px dashed rgba(255,255,255,.18);
       background:
-        radial-gradient(500px 200px at 30% 0%, rgba(124,58,237,.18), transparent 65%),
+        radial-gradient(500px 220px at 30% 0%, rgba(124,58,237,.18), transparent 65%),
         linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
       display:grid;
       place-items:center;
       color: rgba(241,241,255,.58);
       font-size:12px;
       overflow:hidden;
+    }
+    .thumb img{ width:100%;height:100%;object-fit:cover;display:block; }
+
+    /* price options */
+    .priceTitle{
+      margin-top:10px;
+      font-size:12px;
+      color: rgba(241,241,255,.85);
+      font-weight:900;
+    }
+    .options{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .opt{
+      border:none;
+      cursor:pointer;
+      padding:8px 10px;
+      border-radius:14px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color: rgba(241,241,255,.85);
+      font-weight:900;
+      font-size:12px;
+    }
+    .opt.active{
+      background: linear-gradient(90deg, rgba(124,58,237,.38), rgba(34,211,238,.20));
+      border:1px solid rgba(255,255,255,.16);
+      color:#fff;
+      box-shadow: 0 16px 44px rgba(124,58,237,.14);
     }
 
     .row{
@@ -200,41 +248,146 @@
       box-shadow:none;
     }
 
-    .note{
-      margin-top:0;
-      font-size:12px;
-      color: rgba(241,241,255,.72);
-      line-height:1.4;
-    }
-    .foot{
-      margin-top:6px;
-      font-size:11px;
-      color: rgba(241,241,255,.55);
-    }
+    /* Screens */
+    .screen{ display:none; }
+    .screen.active{ display:block; }
 
+    /* Portfolio */
     .portfolioGrid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap:10px;
     }
+    /* ✅ квадратные, кликабельные */
     .work{
       border-radius:16px;
       border:1px dashed rgba(255,255,255,.18);
       background: rgba(255,255,255,.04);
-      height:130px;
+      aspect-ratio: 1 / 1;
       display:grid;
       place-items:center;
-      color: rgba(241,241,255,.58);
+      color: rgba(241,241,255,.65);
       font-size:12px;
       overflow:hidden;
+      cursor:pointer;
+      user-select:none;
     }
+    .work:active{ transform: scale(0.99); }
+    .work img{ width:100%;height:100%;object-fit:cover;display:block; }
 
-    .screen{ display:none; }
-    .screen.active{ display:block; }
+    /* Modal */
+    .backdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      padding:14px;
+      z-index:50;
+    }
+    .modal{
+      width:min(460px,100%);
+      border-radius:22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      backdrop-filter: blur(12px);
+    }
+    .modalHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .modalHead h2{ margin:0; font-size:14px; font-weight:900; }
+    .x{
+      border:none;
+      background:transparent;
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+      opacity:.85;
+    }
+    .modal p{ margin:6px 0 0; color:rgba(241,241,255,.75); font-size:12px; line-height:1.4; }
+    .modal a{ color: var(--p2); font-weight:900; text-decoration:none; }
+
+    /* ✅ Splash loading */
+    #splash{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(900px 520px at 50% -10%, rgba(124,58,237,.30), transparent 60%),
+        radial-gradient(700px 460px at 80% 10%, rgba(34,211,238,.20), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      z-index:100;
+    }
+    .splashBox{
+      width:min(360px, 90vw);
+      text-align:center;
+      padding: 18px 16px 16px;
+    }
+    .sLogo{
+      width:92px;height:92px;
+      border-radius:26px;
+      margin: 0 auto 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 18px 48px rgba(0,0,0,.45);
+      overflow:hidden;
+      display:grid;place-items:center;
+    }
+    .sLogo img{ width:100%;height:100%;object-fit:cover;display:block; }
+    .sText{
+      font-weight:900;
+      letter-spacing:.2px;
+      margin:0 0 10px;
+      color: rgba(241,241,255,.92);
+      font-size:14px;
+    }
+    .sBar{
+      height: 14px;
+      border-radius: 999px; /* округлый как кнопки */
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+    }
+    .sFill{
+      height:100%;
+      width: 0%;
+      border-radius: 999px;
+      /* серый 1% -> белый 100% */
+      background: linear-gradient(90deg, rgba(170,170,170,.70), rgba(255,255,255,.95));
+      animation: loadingFill var(--loadDur) linear forwards;
+    }
+    @keyframes loadingFill { to { width: 100%; } }
+
+    .sHint{
+      margin-top:10px;
+      font-size:12px;
+      color: rgba(241,241,255,.65);
+    }
   </style>
 </head>
 
 <body>
+  <!-- Splash -->
+  <div id="splash" style="--loadDur: 6s;">
+    <div class="splashBox">
+      <div class="sLogo">
+        <img src="logo.png" alt="logo" onerror="this.style.display='none'; this.parentElement.textContent='🟣';" />
+      </div>
+      <p class="sText">Loading Ton Secret Shop…</p>
+      <div class="sBar"><div class="sFill"></div></div>
+      <div class="sHint">please wait</div>
+    </div>
+  </div>
+
   <div class="wrap">
     <div class="top">
       <div class="brand">
@@ -247,7 +400,7 @@
           <p class="sub" id="helloLine">Design services • Web3 vibe</p>
         </div>
       </div>
-      <div class="pill" id="envPill">tg mini app</div>
+      <!-- ❌ убрали плашку tg mini app по твоей правке -->
     </div>
 
     <div class="tabs" role="tablist">
@@ -256,16 +409,18 @@
       <button class="tab" data-tab="order">Заказ</button>
     </div>
 
+    <!-- SERVICES -->
     <section class="screen active" id="services">
       <div class="card">
         <div class="note">
-          Выбери услугу → нажми “Заказать” → откроется Telegram с готовым текстом заявки.
+          Выбери услугу → выбери вариант → нажми “Заказать” → откроется Telegram с готовым текстом заявки.
         </div>
-        <div class="foot">Прайс вставим после того, как ты скинешь прайслист.</div>
       </div>
 
       <div class="grid">
-        <div class="card">
+
+        <!-- Stickers -->
+        <div class="card" data-service="Стикеры / Emoji">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -278,16 +433,27 @@
             <div>
               <h3>⭐️ Стикеры / Emoji</h3>
               <p>Статичные и анимированные. Под Telegram, под стиль проекта.</p>
-              <div class="thumb">Место под примеры (фото/гиф)</div>
+
+              <div class="thumb" data-thumb="stickers">Место под примеры (фото/гиф)</div>
+
+              <div class="priceTitle">Варианты:</div>
+              <div class="options" data-options>
+                <button class="opt active" data-opt="Статичный стикер — $6.5">Стат. стикер $6.5</button>
+                <button class="opt" data-opt="Статичный эмодзи — $7.5">Стат. эмодзи $7.5</button>
+                <button class="opt" data-opt="Анимированный tgs стикер — $49">TGS стикер $49</button>
+                <button class="opt" data-opt="Анимированный эмодзи — $50">TGS эмодзи $50</button>
+              </div>
+
               <div class="row">
-                <button class="btn" data-order="Стикеры/Emoji">Заказать</button>
-                <button class="btn secondary" data-more="Стикеры/Emoji">Подробнее</button>
+                <button class="btn" data-order>Заказать</button>
+                <button class="btn secondary" data-more="Стикеры / Emoji">Подробнее</button>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card">
+        <!-- Design -->
+        <div class="card" data-service="Дизайн проекта">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -298,17 +464,27 @@
             </div>
             <div>
               <h3>🌸 Дизайн проекта</h3>
-              <p>Обои, аватар, баннер, оформление Telegram/соцсетей.</p>
-              <div class="thumb">Место под примеры (фото)</div>
+              <p>Обои, аватар, оформление Telegram/соцсетей, баннеры.</p>
+
+              <div class="thumb" data-thumb="design">Место под примеры (фото)</div>
+
+              <div class="priceTitle">Варианты:</div>
+              <div class="options" data-options>
+                <button class="opt active" data-opt="Заказной арт-аватар — $20">Арт-аватар $20</button>
+                <button class="opt" data-opt="Арт-баннер для поста — $18">Арт-баннер $18</button>
+                <button class="opt" data-opt="Аватар/баннер шаблонный (Photoshop) — $10">Шаблон $10</button>
+              </div>
+
               <div class="row">
-                <button class="btn" data-order="Дизайн проекта">Заказать</button>
+                <button class="btn" data-order>Заказать</button>
                 <button class="btn secondary" data-more="Дизайн проекта">Подробнее</button>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card">
+        <!-- Animation -->
+        <div class="card" data-service="Анимация">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -319,16 +495,28 @@
             <div>
               <h3>🎬 Анимация</h3>
               <p>Лупы, интро, промо, анимации под Telegram/соцсети.</p>
-              <div class="thumb">Место под примеры (gif/video)</div>
+
+              <div class="thumb" data-thumb="motion">Место под примеры (gif/video)</div>
+
+              <div class="priceTitle">Варианты:</div>
+              <div class="options" data-options>
+                <button class="opt active" data-opt="Арт ролик 5 секунд — $25">5s $25</button>
+                <button class="opt" data-opt="Арт ролик 10 секунд — $50">10s $50</button>
+                <button class="opt" data-opt="Арт ролик 15 секунд — $70">15s $70</button>
+                <button class="opt" data-opt="Арт ролик 30 секунд — $120">30s $120</button>
+                <button class="opt" data-opt="Индивидуально обсуждается">Custom</button>
+              </div>
+
               <div class="row">
-                <button class="btn" data-order="Анимация">Заказать</button>
+                <button class="btn" data-order>Заказать</button>
                 <button class="btn secondary" data-more="Анимация">Подробнее</button>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card">
+        <!-- Web3 -->
+        <div class="card" data-service="Web3 / NFT дизайн">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -339,10 +527,17 @@
             </div>
             <div>
               <h3>💎 Web3 / NFT дизайн</h3>
-              <p>Коллекции, постеры, баннеры, карточки, мерч-визуалы.</p>
-              <div class="thumb">Место под примеры</div>
+              <p>Коллекции, постеры, баннеры, карточки, мерч-визуалы. Цена обсуждается индивидуально.</p>
+
+              <div class="thumb" data-thumb="web3">Место под примеры</div>
+
+              <div class="priceTitle">Варианты:</div>
+              <div class="options" data-options>
+                <button class="opt active" data-opt="Индивидуально обсуждается">Индивидуально</button>
+              </div>
+
               <div class="row">
-                <button class="btn" data-order="Web3 / NFT дизайн">Заказать</button>
+                <button class="btn" data-order>Заказать</button>
                 <button class="btn secondary" data-more="Web3 / NFT дизайн">Подробнее</button>
               </div>
             </div>
@@ -352,24 +547,45 @@
       </div>
     </section>
 
+    <!-- PORTFOLIO -->
     <section class="screen" id="portfolio">
       <div class="card">
-        <div class="note">Витрина кейсов. Пока плейсхолдеры — потом заменишь на картинки.</div>
+        <div class="note">
+          Плитки кликабельные. Потом заменишь на картинки и добавим ссылки на стикеры/канал.
+        </div>
       </div>
+
       <div class="card">
         <div class="portfolioGrid">
-          <div class="work">Work #1</div><div class="work">Work #2</div>
-          <div class="work">Work #3</div><div class="work">Work #4</div>
-          <div class="work">Work #5</div><div class="work">Work #6</div>
+          <div class="work" data-work-title="Work #1" data-work-desc="Описание кейса + ссылки" data-work-link="">
+            Work #1
+          </div>
+          <div class="work" data-work-title="Work #2" data-work-desc="Описание кейса + ссылки" data-work-link="">
+            Work #2
+          </div>
+          <div class="work" data-work-title="Work #3" data-work-desc="Описание кейса + ссылки" data-work-link="">
+            Work #3
+          </div>
+          <div class="work" data-work-title="Work #4" data-work-desc="Описание кейса + ссылки" data-work-link="">
+            Work #4
+          </div>
+          <div class="work" data-work-title="Work #5" data-work-desc="Описание кейса + ссылки" data-work-link="">
+            Work #5
+          </div>
+          <div class="work" data-work-title="Work #6" data-work-desc="Описание кейса + ссылки" data-work-link="">
+            Work #6
+          </div>
         </div>
+        <div class="foot">Дальше можем сделать категории (стикеры/баннеры/анимации) и фильтр.</div>
       </div>
     </section>
 
+    <!-- ORDER -->
     <section class="screen" id="order">
       <div class="card">
         <h3 style="margin:0 0 8px;font-size:14px;font-weight:900">Как заказать</h3>
         <div class="note" style="margin-top:0">
-          1) Выбери услугу<br/>
+          1) Выбери услугу и вариант<br/>
           2) Нажми “Заказать” — откроется Telegram с текстом заявки<br/>
           3) Мы уточним детали и сроки
         </div>
@@ -382,29 +598,61 @@
         <div class="note">
           <b>Шаблон заявки:</b><br/>
           Услуга: …<br/>
+          Вариант/цена: …<br/>
           Стиль/референсы: …<br/>
           Кол-во/формат: …<br/>
           Дедлайн: …<br/>
           Бюджет: …<br/>
         </div>
 
-        <div class="foot">Не забудь вписать username бота в переменную BOT_USERNAME.</div>
+        <div class="foot">Бот: @TSS_SHOPbot</div>
+      </div>
+
+      <!-- ✅ нижняя квадратная гифка -->
+      <div class="card">
+        <div class="note" style="margin:0 0 10px">Нижний промо-блок (квадратная GIF). Залей файл <b>promo.gif</b> рядом с index.html.</div>
+        <div class="thumb">
+  <video autoplay loop muted playsinline 
+         style="width:100%;height:100%;object-fit:cover;display:block;border-radius:16px;">
+    <source src="promo.mp4" type="video/mp4">
+  </video>
+</div>
       </div>
     </section>
+  </div>
 
+  <!-- Portfolio modal -->
+  <div class="backdrop" id="backdrop">
+    <div class="modal">
+      <div class="modalHead">
+        <h2 id="mTitle">Work</h2>
+        <button class="x" id="mClose">×</button>
+      </div>
+      <p id="mDesc">Описание</p>
+      <p id="mLinkWrap" style="display:none;margin-top:10px;">
+        <a id="mLink" href="#" target="_blank" rel="noreferrer">Открыть ссылку</a>
+      </p>
+    </div>
   </div>
 
   <script>
     const tg = window.Telegram?.WebApp;
     if (tg) tg.expand();
 
-    document.getElementById("envPill").textContent = tg ? "tg mini app" : "browser preview";
-
+    // приветствие в шапке
     const u = tg?.initDataUnsafe?.user;
     if (u?.first_name) {
       document.getElementById("helloLine").textContent = `Hi, ${u.first_name} • Design services • Web3 vibe`;
     }
 
+    // ✅ Splash duration: поставь 4000..8000 если нужно
+    const SPLASH_MS = 6000; // 6 секунд (в твоём диапазоне 4–8)
+    setTimeout(() => {
+      const s = document.getElementById("splash");
+      if (s) s.style.display = "none";
+    }, SPLASH_MS);
+
+    // Tabs
     const tabs = Array.from(document.querySelectorAll(".tab"));
     const screens = {
       services: document.getElementById("services"),
@@ -419,13 +667,14 @@
     }
     tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
 
-    // Впиши сюда username бота без @
+    // Bot username (без @)
     const BOT_USERNAME = "TSS_SHOPbot";
 
-    function buildOrderText(serviceName){
+    function buildOrderText(serviceName, optionText){
       return [
         "🛒 Заявка Ton Secret Shop",
         "Услуга: " + serviceName,
+        "Вариант/цена: " + optionText,
         "Стиль/референсы: ",
         "Кол-во/формат: ",
         "Дедлайн: ",
@@ -439,14 +688,34 @@
       else window.open(url, "_blank");
     }
 
+    // Options logic per service card
+    document.querySelectorAll("[data-options]").forEach(optWrap => {
+      const opts = Array.from(optWrap.querySelectorAll(".opt"));
+      opts.forEach(btn => {
+        btn.addEventListener("click", () => {
+          opts.forEach(o => o.classList.remove("active"));
+          btn.classList.add("active");
+        });
+      });
+    });
+
+    // Order buttons inside cards
     document.querySelectorAll("[data-order]").forEach(btn => {
-      btn.addEventListener("click", () => openShare(buildOrderText(btn.dataset.order)));
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".card");
+        const serviceName = card?.dataset?.service || "Услуга";
+        const activeOpt = card?.querySelector(".opt.active");
+        const optionText = activeOpt?.dataset?.opt || "Индивидуально";
+        openShare(buildOrderText(serviceName, optionText));
+      });
     });
 
+    // More
     document.querySelectorAll("[data-more]").forEach(btn => {
-      btn.addEventListener("click", () => alert("Скоро добавим описание и примеры: " + btn.dataset.more));
+      btn.addEventListener("click", () => alert("Это подробное описание и примеры:? " + btn.dataset.more));
     });
 
+    // Order tab buttons
     document.getElementById("openBotBtn").addEventListener("click", () => {
       const url = "https://t.me/" + BOT_USERNAME;
       if (tg?.openTelegramLink) tg.openTelegramLink(url);
@@ -454,13 +723,43 @@
     });
 
     document.getElementById("copyTemplateBtn").addEventListener("click", async () => {
-      const template = buildOrderText("...");
+      const template = buildOrderText("…", "…");
       try{
         await navigator.clipboard.writeText(template);
         alert("Скопировано ✅");
       }catch(e){
         alert("Не удалось скопировать. Скопируй вручную:\n\n" + template);
       }
+    });
+
+    // Portfolio modal
+    const backdrop = document.getElementById("backdrop");
+    const mTitle = document.getElementById("mTitle");
+    const mDesc = document.getElementById("mDesc");
+    const mLinkWrap = document.getElementById("mLinkWrap");
+    const mLink = document.getElementById("mLink");
+
+    function openModal(title, desc, link){
+      mTitle.textContent = title || "Work";
+      mDesc.textContent = desc || "";
+      if (link && link.trim()){
+        mLinkWrap.style.display = "block";
+        mLink.href = link;
+      } else {
+        mLinkWrap.style.display = "none";
+      }
+      backdrop.style.display = "flex";
+      try { tg?.HapticFeedback?.impactOccurred("light"); } catch(e){}
+    }
+    function closeModal(){ backdrop.style.display = "none"; }
+
+    document.getElementById("mClose").addEventListener("click", closeModal);
+    backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(); });
+
+    document.querySelectorAll(".work").forEach(tile => {
+      tile.addEventListener("click", () => {
+        openModal(tile.dataset.workTitle, tile.dataset.workDesc, tile.dataset.workLink);
+      });
     });
   </script>
 </body>
