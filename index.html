@@ -175,7 +175,7 @@
     .service h3{ margin:0; font-size:14px; font-weight:900; letter-spacing:.2px; }
     .service p{ margin:6px 0 0; color: var(--muted); font-size:12px; line-height:1.35; }
 
-    /* ✅ квадратные превью, и сразу под картинки */
+    /* square preview */
     .thumb{
       margin-top:10px;
       width:100%;
@@ -202,10 +202,13 @@
     .thumb .ph{
       position:absolute;
       inset:0;
-      display:grid;
+      display:none;
       place-items:center;
       padding:10px;
       text-align:center;
+      color: rgba(241,241,255,.62);
+      background: rgba(0,0,0,.10);
+      backdrop-filter: blur(2px);
     }
 
     /* price options */
@@ -245,7 +248,6 @@
       flex-wrap:wrap;
       margin-top:12px;
     }
-    /* ✅ принудительно кликабельность на ПК */
     .btn{
       border:none;
       cursor:pointer;
@@ -262,6 +264,7 @@
       z-index:5;
       pointer-events:auto;
       user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn.secondary{
       background: rgba(255,255,255,.06);
@@ -309,6 +312,17 @@
       font-size:11px;
       backdrop-filter: blur(8px);
     }
+    .work .ph{
+      position:absolute;
+      inset:0;
+      display:none;
+      place-items:center;
+      text-align:center;
+      padding:10px;
+      color: rgba(241,241,255,.62);
+      background: rgba(0,0,0,.10);
+      backdrop-filter: blur(2px);
+    }
 
     /* Modal */
     .backdrop{
@@ -347,10 +361,125 @@
     }
     .modal p{ margin:6px 0 0; color:rgba(241,241,255,.75); font-size:12px; line-height:1.4; }
     .modal a{ color: var(--p2); font-weight:900; text-decoration:none; }
+
+    /* ===== Splash (ахуенный) ===== */
+    #splash{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(900px 520px at 50% -10%, rgba(124,58,237,.30), transparent 60%),
+        radial-gradient(700px 460px at 80% 10%, rgba(34,211,238,.20), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      z-index:999;
+      overflow:hidden;
+    }
+    #splash::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.80), transparent 60%),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,.70), transparent 60%),
+        radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,.50), transparent 60%),
+        radial-gradient(2px 2px at 45% 55%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(1px 1px at 55% 10%, rgba(255,255,255,.60), transparent 60%),
+        radial-gradient(1px 1px at 15% 65%, rgba(255,255,255,.45), transparent 60%),
+        radial-gradient(2px 2px at 85% 15%, rgba(255,255,255,.28), transparent 60%),
+        radial-gradient(1px 1px at 65% 85%, rgba(255,255,255,.42), transparent 60%);
+      opacity:.55;
+      filter: blur(.2px);
+      transform: rotate(-6deg);
+      pointer-events:none;
+      animation: starDrift 8s ease-in-out infinite alternate;
+    }
+    @keyframes starDrift{
+      from{ transform: translateY(-10px) rotate(-6deg); opacity:.45; }
+      to{ transform: translateY(10px) rotate(-6deg); opacity:.65; }
+    }
+    #splash.fadeOut{ animation: splashFade .55s ease forwards; }
+    @keyframes splashFade{ to{ opacity:0; transform: scale(1.02); } }
+
+    .splashBox{
+      width:min(360px, 90vw);
+      text-align:center;
+      padding: 18px 16px 16px;
+      position:relative;
+      z-index:2;
+    }
+    .sLogo{
+      width:92px;height:92px;
+      border-radius:26px;
+      margin: 0 auto 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 18px 48px rgba(0,0,0,.45);
+      overflow:hidden;
+      display:grid;place-items:center;
+    }
+    .sLogo img{ width:100%;height:100%;object-fit:cover;display:block; }
+    .sText{
+      font-weight:900;
+      letter-spacing:.2px;
+      margin:0 0 10px;
+      color: rgba(241,241,255,.92);
+      font-size:14px;
+    }
+    .sBar{
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+    }
+    .sFill{
+      height:100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg,
+        rgba(65,65,72,.95),
+        rgba(120,120,135,.85),
+        rgba(255,255,255,.95)
+      );
+      position:relative;
+      overflow:hidden;
+      animation:
+        loadingFill var(--loadDur) linear forwards,
+        fillToWhite var(--loadDur) linear forwards;
+    }
+    .sFill::after{
+      content:"";
+      position:absolute;
+      inset:-40% -30%;
+      background: radial-gradient(closest-side, rgba(255,255,255,.40), transparent 65%);
+      transform: translateX(-40%) rotate(12deg);
+      animation: sheen 1.2s ease-in-out infinite;
+      opacity:.55;
+    }
+    @keyframes loadingFill{ to{ width:100%; } }
+    @keyframes sheen{ 0%{ transform: translateX(-40%) rotate(12deg); } 100%{ transform: translateX(140%) rotate(12deg); } }
+    @keyframes fillToWhite{ 0%,85%{ filter:brightness(1); } 100%{ filter:brightness(1.35); } }
+    .sHint{ margin-top:10px; font-size:12px; color: rgba(241,241,255,.65); }
   </style>
 </head>
 
 <body>
+  <!-- Splash -->
+  <div id="splash" style="--loadDur: 6s;">
+    <div class="splashBox">
+      <div class="sLogo">
+        <img src="logo.png" alt="logo" onerror="this.style.display='none'; this.parentElement.textContent='🟣';" />
+      </div>
+      <p class="sText">Welcome to TonSecretShop</p>
+      <div class="sBar"><div class="sFill"></div></div>
+      <div class="sHint">Preparing experience…</div>
+    </div>
+  </div>
+
   <div class="wrap">
     <div class="top">
       <div class="brand">
@@ -375,7 +504,7 @@
     <section class="screen active" id="services">
       <div class="card">
         <div class="note">
-          Выбери услугу → выбери вариант → нажми “Заказать” → откроется Telegram с готовым текстом сообщения.
+          Выбери услугу → выбери вариант → нажми “Заказать” → откроется чат с готовым текстом.
         </div>
         <div class="foot">Сообщение уходит тебе в личку: @Rapgospod</div>
       </div>
@@ -383,7 +512,7 @@
       <div class="grid">
 
         <!-- Stickers -->
-        <div class="card" data-service="Стикеры / Emoji" data-thumb="stickersEmoj.png">
+        <div class="card" data-service="Стикеры / Emoji">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -398,8 +527,9 @@
               <p>Статичные и анимированные. Под Telegram, под стиль проекта.</p>
 
               <div class="thumb">
-                <img src="stickersEmoj.png" alt="stickers" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-                <div class="ph">Место под примеры (stickersEmoj.png)</div>
+                <img src="stickersEmoj.png" alt="stickers"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="ph">stickersEmoj.png</div>
               </div>
 
               <div class="priceTitle">Варианты:</div>
@@ -419,7 +549,7 @@
         </div>
 
         <!-- Design -->
-        <div class="card" data-service="Дизайн проекта" data-thumb="AvatarsLogo.png">
+        <div class="card" data-service="Дизайн проекта">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -433,8 +563,9 @@
               <p>Обои, аватар, оформление Telegram/соцсетей, баннеры.</p>
 
               <div class="thumb">
-                <img src="AvatarsLogo.png" alt="design" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-                <div class="ph">Место под примеры (AvatarsLogo.png)</div>
+                <img src="AvatarsLogo.png" alt="design"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="ph">AvatarsLogo.png</div>
               </div>
 
               <div class="priceTitle">Варианты:</div>
@@ -453,7 +584,7 @@
         </div>
 
         <!-- Animation -->
-        <div class="card" data-service="Анимация" data-thumb="animations.png">
+        <div class="card" data-service="Анимация">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -466,8 +597,9 @@
               <p>Лупы, интро, промо, анимации под Telegram/соцсети.</p>
 
               <div class="thumb">
-                <img src="animations.png" alt="motion" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-                <div class="ph">Место под примеры (animations.png)</div>
+                <img src="animations.png" alt="motion"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="ph">animations.png</div>
               </div>
 
               <div class="priceTitle">Варианты:</div>
@@ -488,7 +620,7 @@
         </div>
 
         <!-- Web3 -->
-        <div class="card" data-service="Web3 / NFT дизайн" data-thumb="Web3NFT.png">
+        <div class="card" data-service="Web3 / NFT дизайн">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -502,8 +634,9 @@
               <p>Коллекции, постеры, баннеры, карточки, мерч-визуалы. Цена обсуждается индивидуально.</p>
 
               <div class="thumb">
-                <img src="Web3NFT.png" alt="web3" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-                <div class="ph">Место под примеры (Web3NFT.png)</div>
+                <img src="Web3NFT.png" alt="web3"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="ph">Web3NFT.png</div>
               </div>
 
               <div class="priceTitle">Варианты:</div>
@@ -526,7 +659,7 @@
     <section class="screen" id="portfolio">
       <div class="card">
         <div class="note">
-          Плитки кликабельные. Сейчас подгружаем превью work1.png … work6.png.
+          Плитки кликабельные. Превью: work1.png … work6.png
         </div>
       </div>
 
@@ -570,7 +703,7 @@
           </div>
 
         </div>
-        <div class="foot">Позже добавим подписи вместо Work# и ссылки на стикеры/канал.</div>
+        <div class="foot">Позже добавим подписи и ссылки.</div>
       </div>
     </section>
 
@@ -588,19 +721,8 @@
           <button class="btn" id="openMeBtn">Открыть чат @Rapgospod</button>
           <button class="btn secondary" id="copyTemplateBtn">Скопировать шаблон</button>
         </div>
-
-        <div class="note">
-          <b>Шаблон:</b><br/>
-          Услуга: …<br/>
-          Вариант/цена: …<br/>
-          Стиль/референсы: …<br/>
-          Кол-во/формат: …<br/>
-          Дедлайн: …<br/>
-          Бюджет: …<br/>
-        </div>
       </div>
 
-      <!-- promo block mp4 -->
       <div class="card">
         <div class="note" style="margin:0 0 10px">
           Промо-блок: загрузи <b>promo.mp4</b> (или запасной <b>promo.gif</b>) рядом с index.html
@@ -610,16 +732,14 @@
           <video id="promoVid" autoplay loop muted playsinline preload="auto">
             <source src="promo.mp4" type="video/mp4">
           </video>
-
           <img id="promoGif" src="promo.gif" alt="promo" style="display:none;" />
-
-          <div id="promoFallback" class="ph" style="display:none;">promo.mp4 / promo.gif (placeholder)</div>
+          <div id="promoFallback" class="ph">promo.mp4 / promo.gif (placeholder)</div>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- Portfolio modal -->
+  <!-- Modal -->
   <div class="backdrop" id="backdrop">
     <div class="modal">
       <div class="modalHead">
@@ -636,6 +756,19 @@
   <script>
     const tg = window.Telegram?.WebApp;
     if (tg) tg.expand();
+
+    // Splash random 4-8 sec
+    const splash = document.getElementById("splash");
+    const dur = (Math.floor(Math.random() * 5) + 4); // 4..8
+    if (splash) splash.style.setProperty("--loadDur", dur + "s");
+    const SPLASH_MS = dur * 1000;
+
+    setTimeout(() => {
+      const s = document.getElementById("splash");
+      if (!s) return;
+      s.classList.add("fadeOut");
+      setTimeout(()=> s.style.display="none", 600);
+    }, SPLASH_MS);
 
     // greeting
     const u = tg?.initDataUnsafe?.user;
@@ -657,9 +790,8 @@
     }
     tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
 
-    // ===== SEND ORDER TO @Rapgospod with prefilled text
+    // Send to @Rapgospod
     const TARGET_USER = "Rapgospod"; // без @
-
     function buildOrderText(serviceName, optionText){
       return [
         "🛒 Ton Secret Shop — new order",
@@ -671,9 +803,6 @@
         "Budget: ",
       ].join("\n");
     }
-
-    // самый надежный способ на ПК и в Telegram Desktop:
-    // открываем прямой deeplink на username с text=
     function openChatWithText(username, text){
       const url = "https://t.me/" + username + "?text=" + encodeURIComponent(text);
       try{
@@ -684,7 +813,7 @@
       }
     }
 
-    // Options per card
+    // Options
     document.querySelectorAll("[data-options]").forEach(optWrap => {
       const opts = Array.from(optWrap.querySelectorAll(".opt"));
       opts.forEach(btn => {
@@ -696,7 +825,7 @@
       });
     });
 
-    // Order buttons (делаем и click и pointerup — на некоторых десктопах Telegram так надежнее)
+    // Order buttons
     document.querySelectorAll("[data-order]").forEach(btn => {
       const handler = (e) => {
         e.preventDefault();
@@ -717,7 +846,6 @@
       btn.addEventListener("click", () => alert("Скоро добавим подробное описание и примеры: " + btn.dataset.more));
     });
 
-    // Order tab buttons
     document.getElementById("openMeBtn").addEventListener("click", () => {
       openChatWithText(TARGET_USER, buildOrderText("…", "…"));
     });
@@ -732,7 +860,7 @@
       }
     });
 
-    // ===== Promo mp4 fallback -> gif -> placeholder
+    // Promo fallback
     (function(){
       const v = document.getElementById("promoVid");
       const g = document.getElementById("promoGif");
@@ -746,11 +874,9 @@
       };
 
       v.addEventListener("error", () => {
-        // mp4 failed -> try gif
         v.style.display = "none";
         if (g) g.style.display = "block";
         if (f) f.style.display = "none";
-
         if (g){
           g.onerror = () => showFallback();
         } else {
@@ -763,7 +889,7 @@
       });
     })();
 
-    // ===== Portfolio modal
+    // Modal
     const backdrop = document.getElementById("backdrop");
     const mTitle = document.getElementById("mTitle");
     const mDesc = document.getElementById("mDesc");
