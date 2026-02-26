@@ -14,10 +14,8 @@
       --muted:#b7b5d4;
       --stroke:rgba(255,255,255,.10);
       --shadow: 0 18px 48px rgba(0,0,0,.55);
-
       --p1:#7c3aed;
       --p2:#22d3ee;
-
       --cardA: rgba(255,255,255,.06);
       --cardB: rgba(255,255,255,.03);
     }
@@ -41,83 +39,47 @@
     .wrap{ width:min(460px,100%); }
 
     /* Header */
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:12px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-    }
+    .top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
     .logo{
-      width:46px;height:46px;
-      border-radius:16px;
+      width:46px;height:46px;border-radius:16px;
       background: rgba(255,255,255,.05);
       border:1px solid var(--stroke);
       box-shadow: 0 12px 30px rgba(0,0,0,.35);
-      overflow:hidden;
-      flex:0 0 auto;
-      display:grid;place-items:center;
+      overflow:hidden; flex:0 0 auto; display:grid;place-items:center;
     }
     .logo img{ width:100%;height:100%; object-fit:cover; display:block; }
     .titleWrap{ min-width:0; }
     .title{
-      margin:0;
-      font-weight:900;
-      font-size:16px;
-      letter-spacing:.2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      margin:0; font-weight:900; font-size:16px; letter-spacing:.2px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
     .sub{
-      margin:4px 0 0;
-      font-size:12px;
-      color:var(--muted);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      margin:4px 0 0; font-size:12px; color:var(--muted);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
 
     /* Tabs */
     .tabs{
-      display:flex;
-      gap:8px;
-      padding:8px;
-      border-radius:18px;
+      display:flex; gap:8px; padding:8px; border-radius:18px;
       background: rgba(255,255,255,.05);
       border:1px solid var(--stroke);
       box-shadow: 0 12px 34px rgba(0,0,0,.35);
       margin-bottom:12px;
-      position:sticky;
-      top:10px;
+      position:sticky; top:10px;
       backdrop-filter: blur(10px);
       z-index:2;
     }
     .tab{
-      flex:1;
-      border:none;
-      background: transparent;
+      flex:1; border:none; background: transparent;
       color: rgba(241,241,255,.78);
-      font-weight:900;
-      padding:12px 10px;
-      border-radius:16px;
-      cursor:pointer;
-      font-size:13px;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
+      font-weight:900; padding:12px 10px;
+      border-radius:16px; cursor:pointer; font-size:13px;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      -webkit-tap-highlight-color: transparent;
     }
     .tab .dot{
-      width:10px;height:10px;
-      border-radius:3px;
+      width:10px;height:10px;border-radius:3px;
       background: rgba(255,255,255,.00);
       border:1px solid rgba(255,255,255,.00);
       flex:0 0 auto;
@@ -144,38 +106,24 @@
       backdrop-filter: blur(10px);
       margin-bottom:12px;
     }
-
-    .note{
-      margin-top:0;
-      font-size:12px;
-      color: rgba(241,241,255,.78);
-      line-height:1.4;
-    }
-    .foot{
-      margin-top:6px;
-      font-size:11px;
-      color: rgba(241,241,255,.55);
-    }
-
+    .note{ margin-top:0; font-size:12px; color: rgba(241,241,255,.78); line-height:1.4; }
+    .foot{ margin-top:6px; font-size:11px; color: rgba(241,241,255,.55); }
     .grid{ display:grid; grid-template-columns: 1fr; gap:12px; }
 
     .service{ display:flex; gap:12px; align-items:flex-start; }
     .icon{
-      width:44px;height:44px;
-      border-radius:16px;
+      width:44px;height:44px;border-radius:16px;
       border:1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(124,58,237,.22), rgba(34,211,238,.10));
-      display:grid;
-      place-items:center;
+      display:grid; place-items:center;
       flex:0 0 auto;
       box-shadow: 0 16px 44px rgba(0,0,0,.35);
     }
     .icon svg{ width:22px;height:22px; opacity:.95; }
-
     .service h3{ margin:0; font-size:14px; font-weight:900; letter-spacing:.2px; }
     .service p{ margin:6px 0 0; color: var(--muted); font-size:12px; line-height:1.35; }
 
-    /* square preview */
+    /* previews */
     .thumb{
       margin-top:10px;
       width:100%;
@@ -192,9 +140,8 @@
       overflow:hidden;
       position:relative;
     }
-    .thumb img, .thumb video{
-      width:100%;
-      height:100%;
+    .thumb img{
+      width:100%; height:100%;
       object-fit:cover;
       display:block;
       border-radius:16px;
@@ -212,28 +159,15 @@
     }
 
     /* price options */
-    .priceTitle{
-      margin-top:10px;
-      font-size:12px;
-      color: rgba(241,241,255,.85);
-      font-weight:900;
-    }
-    .options{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
+    .priceTitle{ margin-top:10px; font-size:12px; color: rgba(241,241,255,.85); font-weight:900; }
+    .options{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
     .opt{
-      border:none;
-      cursor:pointer;
-      padding:8px 10px;
-      border-radius:14px;
+      border:none; cursor:pointer; padding:8px 10px; border-radius:14px;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
       color: rgba(241,241,255,.85);
-      font-weight:900;
-      font-size:12px;
+      font-weight:900; font-size:12px;
+      -webkit-tap-highlight-color: transparent;
     }
     .opt.active{
       background: linear-gradient(90deg, rgba(124,58,237,.38), rgba(34,211,238,.20));
@@ -242,24 +176,16 @@
       box-shadow: 0 16px 44px rgba(124,58,237,.14);
     }
 
-    .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     .btn{
-      border:none;
-      cursor:pointer;
-      font-weight:900;
-      font-size:13px;
+      border:none; cursor:pointer;
+      font-weight:900; font-size:13px;
       padding:12px 14px;
       border-radius:16px;
       color:#05050a;
       background: linear-gradient(90deg, rgba(124,58,237,1), rgba(34,211,238,1));
       box-shadow: 0 16px 44px rgba(124,58,237,.20);
       flex: 1 1 160px;
-
       position:relative;
       z-index:5;
       pointer-events:auto;
@@ -278,11 +204,7 @@
     .screen.active{ display:block; }
 
     /* Portfolio */
-    .portfolioGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-    }
+    .portfolioGrid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
     .work{
       border-radius:16px;
       border:1px dashed rgba(255,255,255,.18);
@@ -296,6 +218,7 @@
       cursor:pointer;
       user-select:none;
       position:relative;
+      -webkit-tap-highlight-color: transparent;
     }
     .work:active{ transform: scale(0.99); }
     .work img{ width:100%;height:100%;object-fit:cover;display:block; }
@@ -324,24 +247,47 @@
       backdrop-filter: blur(2px);
     }
 
-    /* Modal */
+    /* ===== Liquid Glass modal ===== */
     .backdrop{
       position:fixed; inset:0;
-      background: rgba(0,0,0,.55);
+      background: rgba(0,0,0,.50);
       display:none;
       align-items:flex-end;
       justify-content:center;
       padding:14px;
       z-index:50;
+
+      opacity:0;
+      transform: translateY(8px);
+      transition: opacity .28s ease, transform .28s ease;
     }
+    .backdrop.show{
+      display:flex;
+      opacity:1;
+      transform: translateY(0);
+    }
+    .wrap.modalOpen{
+      transition: transform .28s ease, filter .28s ease;
+      transform: scale(.985);
+      filter: blur(1.2px) saturate(1.05);
+    }
+
     .modal{
       width:min(460px,100%);
       border-radius:22px;
-      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
-      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.14);
       box-shadow: var(--shadow);
       padding: 14px;
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+
+      transform: translateY(16px) scale(.985);
+      opacity:0;
+      transition: transform .28s ease, opacity .28s ease;
+    }
+    .backdrop.show .modal{
+      transform: translateY(0) scale(1);
+      opacity:1;
     }
     .modalHead{
       display:flex;
@@ -359,10 +305,26 @@
       cursor:pointer;
       opacity:.85;
     }
-    .modal p{ margin:6px 0 0; color:rgba(241,241,255,.75); font-size:12px; line-height:1.4; }
+    .mImg{
+      width:100%;
+      aspect-ratio: 1 / 1;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 48px rgba(0,0,0,.35);
+      transform: scale(.985);
+      animation: popIn .28s ease forwards;
+    }
+    @keyframes popIn{
+      from{ transform: scale(.965); filter: blur(1px); }
+      to{ transform: scale(1); filter: blur(0); }
+    }
+    .mImg img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .modal p{ margin:10px 0 0; color:rgba(241,241,255,.78); font-size:12px; line-height:1.45; }
     .modal a{ color: var(--p2); font-weight:900; text-decoration:none; }
 
-    /* ===== Splash (ахуенный) ===== */
+    /* ===== Splash (дорого) ===== */
     #splash{
       position:fixed;
       inset:0;
@@ -376,30 +338,39 @@
       z-index:999;
       overflow:hidden;
     }
+
+    /* star layer (много точек) */
     #splash::before{
       content:"";
       position:absolute;
-      inset:-40%;
+      inset:-30%;
       background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.80), transparent 60%),
-        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.55), transparent 60%),
-        radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,.70), transparent 60%),
+        radial-gradient(1px 1px at 5% 15%, rgba(255,255,255,.80), transparent 60%),
+        radial-gradient(1px 1px at 12% 75%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(1px 1px at 18% 35%, rgba(255,255,255,.70), transparent 60%),
+        radial-gradient(1px 1px at 25% 55%, rgba(255,255,255,.50), transparent 60%),
+        radial-gradient(2px 2px at 33% 25%, rgba(255,255,255,.30), transparent 60%),
+        radial-gradient(1px 1px at 38% 85%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(1px 1px at 44% 10%, rgba(255,255,255,.60), transparent 60%),
+        radial-gradient(2px 2px at 52% 40%, rgba(255,255,255,.28), transparent 60%),
+        radial-gradient(1px 1px at 58% 70%, rgba(255,255,255,.42), transparent 60%),
+        radial-gradient(1px 1px at 62% 20%, rgba(255,255,255,.52), transparent 60%),
+        radial-gradient(2px 2px at 68% 55%, rgba(255,255,255,.24), transparent 60%),
+        radial-gradient(1px 1px at 72% 85%, rgba(255,255,255,.40), transparent 60%),
+        radial-gradient(1px 1px at 78% 30%, rgba(255,255,255,.65), transparent 60%),
+        radial-gradient(2px 2px at 84% 12%, rgba(255,255,255,.26), transparent 60%),
         radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,.50), transparent 60%),
-        radial-gradient(2px 2px at 45% 55%, rgba(255,255,255,.35), transparent 60%),
-        radial-gradient(1px 1px at 55% 10%, rgba(255,255,255,.60), transparent 60%),
-        radial-gradient(1px 1px at 15% 65%, rgba(255,255,255,.45), transparent 60%),
-        radial-gradient(2px 2px at 85% 15%, rgba(255,255,255,.28), transparent 60%),
-        radial-gradient(1px 1px at 65% 85%, rgba(255,255,255,.42), transparent 60%);
-      opacity:.55;
+        radial-gradient(1px 1px at 95% 35%, rgba(255,255,255,.45), transparent 60%);
+      opacity:.65;
       filter: blur(.2px);
-      transform: rotate(-6deg);
       pointer-events:none;
       animation: starDrift 8s ease-in-out infinite alternate;
     }
     @keyframes starDrift{
-      from{ transform: translateY(-10px) rotate(-6deg); opacity:.45; }
-      to{ transform: translateY(10px) rotate(-6deg); opacity:.65; }
+      from{ transform: translateY(-10px) rotate(-2deg); opacity:.50; }
+      to{ transform: translateY(10px) rotate(-2deg); opacity:.75; }
     }
+
     #splash.fadeOut{ animation: splashFade .55s ease forwards; }
     @keyframes splashFade{ to{ opacity:0; transform: scale(1.02); } }
 
@@ -463,7 +434,8 @@
     @keyframes loadingFill{ to{ width:100%; } }
     @keyframes sheen{ 0%{ transform: translateX(-40%) rotate(12deg); } 100%{ transform: translateX(140%) rotate(12deg); } }
     @keyframes fillToWhite{ 0%,85%{ filter:brightness(1); } 100%{ filter:brightness(1.35); } }
-    .sHint{ margin-top:10px; font-size:12px; color: rgba(241,241,255,.65); }
+
+    .sHint{ margin-top:10px; font-size:12px; color: rgba(241,241,255,.70); min-height: 16px; }
   </style>
 </head>
 
@@ -476,7 +448,7 @@
       </div>
       <p class="sText">Welcome to TonSecretShop</p>
       <div class="sBar"><div class="sFill"></div></div>
-      <div class="sHint">Preparing experience…</div>
+      <div class="sHint" id="sHint">Preparing experience…</div>
     </div>
   </div>
 
@@ -658,52 +630,57 @@
     <!-- PORTFOLIO -->
     <section class="screen" id="portfolio">
       <div class="card">
-        <div class="note">
-          Плитки кликабельные. Превью: work1.png … work6.png
-        </div>
+        <div class="note">Плитки кликабельные. По клику открывается “эпизод” (workXepX.png) и описание.</div>
       </div>
 
       <div class="card">
         <div class="portfolioGrid">
 
-          <div class="work" data-work-title="Work #1" data-work-desc="Описание кейса + ссылки" data-work-link="">
+          <div class="work"
+            data-work-title="Стикеры статичные"
+            data-ep-img="work1ep1.png"
+            data-work-desc="Стикерпак каналу: t.me/barboskich.ton
+ссылка на стикерпак: t.me/addstickers/BarboskichtonBarboskichTon
+В стикерпаке 51 уникальный стикер, одна из первых объёмных работ Tss
+Владелец канала: https://t.me/barboskich"
+            data-work-link="">
             <img src="work1.png" alt="work1" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work1.png</div>
             <div class="label">Work #1</div>
           </div>
 
-          <div class="work" data-work-title="Work #2" data-work-desc="Описание кейса + ссылки" data-work-link="">
+          <div class="work" data-work-title="Work #2" data-ep-img="work2ep2.png" data-work-desc="Описание кейса позже" data-work-link="">
             <img src="work2.png" alt="work2" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work2.png</div>
             <div class="label">Work #2</div>
           </div>
 
-          <div class="work" data-work-title="Work #3" data-work-desc="Описание кейса + ссылки" data-work-link="">
+          <div class="work" data-work-title="Work #3" data-ep-img="work3ep3.png" data-work-desc="Описание кейса позже" data-work-link="">
             <img src="work3.png" alt="work3" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work3.png</div>
             <div class="label">Work #3</div>
           </div>
 
-          <div class="work" data-work-title="Work #4" data-work-desc="Описание кейса + ссылки" data-work-link="">
+          <div class="work" data-work-title="Work #4" data-ep-img="work4ep4.png" data-work-desc="Описание кейса позже" data-work-link="">
             <img src="work4.png" alt="work4" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work4.png</div>
             <div class="label">Work #4</div>
           </div>
 
-          <div class="work" data-work-title="Work #5" data-work-desc="Описание кейса + ссылки" data-work-link="">
+          <div class="work" data-work-title="Work #5" data-ep-img="work5ep5.png" data-work-desc="Описание кейса позже" data-work-link="">
             <img src="work5.png" alt="work5" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work5.png</div>
             <div class="label">Work #5</div>
           </div>
 
-          <div class="work" data-work-title="Work #6" data-work-desc="Описание кейса + ссылки" data-work-link="">
+          <div class="work" data-work-title="Work #6" data-ep-img="work6ep6.png" data-work-desc="Описание кейса позже" data-work-link="">
             <img src="work6.png" alt="work6" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work6.png</div>
             <div class="label">Work #6</div>
           </div>
 
         </div>
-        <div class="foot">Позже добавим подписи и ссылки.</div>
+        <div class="foot">Потом заменим названия Work# на реальные категории и добавим ссылки.</div>
       </div>
     </section>
 
@@ -725,15 +702,13 @@
 
       <div class="card">
         <div class="note" style="margin:0 0 10px">
-          Промо-блок: загрузи <b>promo.mp4</b> (или запасной <b>promo.gif</b>) рядом с index.html
+          Картинка для блока: <b>TSSs.png</b> рядом с index.html
         </div>
 
-        <div class="thumb" style="padding:0;">
-          <video id="promoVid" autoplay loop muted playsinline preload="auto">
-            <source src="promo.mp4" type="video/mp4">
-          </video>
-          <img id="promoGif" src="promo.gif" alt="promo" style="display:none;" />
-          <div id="promoFallback" class="ph">promo.mp4 / promo.gif (placeholder)</div>
+        <div class="thumb">
+          <img src="TSSs.png" alt="TSS"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+          <div class="ph" style="display:grid;">TSSs.png (placeholder)</div>
         </div>
       </div>
     </section>
@@ -746,7 +721,13 @@
         <h2 id="mTitle">Work</h2>
         <button class="x" id="mClose">×</button>
       </div>
-      <p id="mDesc">Описание</p>
+
+      <div class="mImg">
+        <img id="mImg" src="" alt="preview" onerror="this.style.display='none';" />
+      </div>
+
+      <p id="mDesc" style="white-space:pre-line;"></p>
+
       <p id="mLinkWrap" style="display:none;margin-top:10px;">
         <a id="mLink" href="#" target="_blank" rel="noreferrer">Открыть ссылку</a>
       </p>
@@ -757,11 +738,32 @@
     const tg = window.Telegram?.WebApp;
     if (tg) tg.expand();
 
-    // Splash random 4-8 sec
+    // ===== Random splash duration 4..8 sec
     const splash = document.getElementById("splash");
     const dur = (Math.floor(Math.random() * 5) + 4); // 4..8
     if (splash) splash.style.setProperty("--loadDur", dur + "s");
     const SPLASH_MS = dur * 1000;
+
+    // ===== Random “game-like” loading phrases
+    const phrases = [
+      "Loading…",
+      "Загрузка…",
+      "Подгружаем данные…",
+      "Убираем пыль…",
+      "Стираем с доски…",
+      "Проверяем данные…",
+      "Обрабатываем комнату…",
+      "Проветриваем помещение…",
+      "Протираем окно…",
+      "Взвешиваем кота…",
+      "Строим комнату…",
+      // мои
+      "Заряжаем неон…",
+      "Калибруем градиенты…",
+      "Включаем магию Web3…"
+    ];
+    const sHint = document.getElementById("sHint");
+    if (sHint) sHint.textContent = phrases[Math.floor(Math.random() * phrases.length)];
 
     setTimeout(() => {
       const s = document.getElementById("splash");
@@ -790,7 +792,7 @@
     }
     tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
 
-    // Send to @Rapgospod
+    // Send order to @Rapgospod
     const TARGET_USER = "Rapgospod"; // без @
     function buildOrderText(serviceName, optionText){
       return [
@@ -825,7 +827,7 @@
       });
     });
 
-    // Order buttons
+    // Order buttons (click + pointerup for desktop)
     document.querySelectorAll("[data-order]").forEach(btn => {
       const handler = (e) => {
         e.preventDefault();
@@ -860,62 +862,54 @@
       }
     });
 
-    // Promo fallback
-    (function(){
-      const v = document.getElementById("promoVid");
-      const g = document.getElementById("promoGif");
-      const f = document.getElementById("promoFallback");
-      if (!v) return;
-
-      const showFallback = () => {
-        v.style.display = "none";
-        if (g) g.style.display = "none";
-        if (f) f.style.display = "grid";
-      };
-
-      v.addEventListener("error", () => {
-        v.style.display = "none";
-        if (g) g.style.display = "block";
-        if (f) f.style.display = "none";
-        if (g){
-          g.onerror = () => showFallback();
-        } else {
-          showFallback();
-        }
-      });
-
-      v.addEventListener("canplay", async () => {
-        try { await v.play(); } catch(e) {}
-      });
-    })();
-
-    // Modal
+    // ===== Liquid Glass modal
     const backdrop = document.getElementById("backdrop");
     const mTitle = document.getElementById("mTitle");
     const mDesc = document.getElementById("mDesc");
+    const mImg = document.getElementById("mImg");
     const mLinkWrap = document.getElementById("mLinkWrap");
     const mLink = document.getElementById("mLink");
 
-    function openModal(title, desc, link){
+    function openModal(title, desc, link, epImg){
       mTitle.textContent = title || "Work";
       mDesc.textContent = desc || "";
+
+      if (epImg && epImg.trim()){
+        mImg.style.display = "block";
+        mImg.src = epImg;
+      } else {
+        mImg.style.display = "none";
+        mImg.src = "";
+      }
+
       if (link && link.trim()){
         mLinkWrap.style.display = "block";
         mLink.href = link;
       } else {
         mLinkWrap.style.display = "none";
       }
+
       backdrop.style.display = "flex";
+      requestAnimationFrame(() => {
+        backdrop.classList.add("show");
+        document.querySelector(".wrap")?.classList.add("modalOpen");
+      });
+
       try { tg?.HapticFeedback?.impactOccurred("light"); } catch(e){}
     }
-    function closeModal(){ backdrop.style.display = "none"; }
+
+    function closeModal(){
+      backdrop.classList.remove("show");
+      document.querySelector(".wrap")?.classList.remove("modalOpen");
+      setTimeout(() => { backdrop.style.display = "none"; }, 280);
+    }
 
     document.getElementById("mClose").addEventListener("click", closeModal);
     backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(); });
 
     document.querySelectorAll(".work").forEach(tile => {
       tile.addEventListener("click", () => {
-        openModal(tile.dataset.workTitle, tile.dataset.workDesc, tile.dataset.workLink);
+        openModal(tile.dataset.workTitle, tile.dataset.workDesc, tile.dataset.workLink, tile.dataset.epImg);
       });
     });
   </script>
