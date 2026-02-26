@@ -15,9 +15,8 @@
       --stroke:rgba(255,255,255,.10);
       --shadow: 0 18px 48px rgba(0,0,0,.55);
 
-      --p1:#7c3aed;  /* purple */
-      --p2:#22d3ee;  /* cyan */
-      --p3:#a78bfa;  /* soft purple */
+      --p1:#7c3aed;
+      --p2:#22d3ee;
 
       --cardA: rgba(255,255,255,.06);
       --cardB: rgba(255,255,255,.03);
@@ -115,14 +114,13 @@
       align-items:center;
       justify-content:center;
       gap:8px;
-      position:relative;
     }
     .tab .dot{
       width:10px;height:10px;
       border-radius:3px;
       background: rgba(255,255,255,.00);
       border:1px solid rgba(255,255,255,.00);
-      flex: 0 0 auto;
+      flex:0 0 auto;
     }
     .tab.active{
       color: var(--text);
@@ -177,7 +175,7 @@
     .service h3{ margin:0; font-size:14px; font-weight:900; letter-spacing:.2px; }
     .service p{ margin:6px 0 0; color: var(--muted); font-size:12px; line-height:1.35; }
 
-    /* square preview */
+    /* ✅ квадратные превью, и сразу под картинки */
     .thumb{
       margin-top:10px;
       width:100%;
@@ -192,6 +190,7 @@
       color: rgba(241,241,255,.58);
       font-size:12px;
       overflow:hidden;
+      position:relative;
     }
     .thumb img, .thumb video{
       width:100%;
@@ -199,6 +198,14 @@
       object-fit:cover;
       display:block;
       border-radius:16px;
+    }
+    .thumb .ph{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      padding:10px;
+      text-align:center;
     }
 
     /* price options */
@@ -238,6 +245,7 @@
       flex-wrap:wrap;
       margin-top:12px;
     }
+    /* ✅ принудительно кликабельность на ПК */
     .btn{
       border:none;
       cursor:pointer;
@@ -249,6 +257,11 @@
       background: linear-gradient(90deg, rgba(124,58,237,1), rgba(34,211,238,1));
       box-shadow: 0 16px 44px rgba(124,58,237,.20);
       flex: 1 1 160px;
+
+      position:relative;
+      z-index:5;
+      pointer-events:auto;
+      user-select:none;
     }
     .btn.secondary{
       background: rgba(255,255,255,.06);
@@ -279,9 +292,23 @@
       overflow:hidden;
       cursor:pointer;
       user-select:none;
+      position:relative;
     }
     .work:active{ transform: scale(0.99); }
     .work img{ width:100%;height:100%;object-fit:cover;display:block; }
+    .work .label{
+      position:absolute;
+      left:10px;
+      bottom:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.12);
+      color: rgba(241,241,255,.92);
+      font-weight:900;
+      font-size:11px;
+      backdrop-filter: blur(8px);
+    }
 
     /* Modal */
     .backdrop{
@@ -320,146 +347,10 @@
     }
     .modal p{ margin:6px 0 0; color:rgba(241,241,255,.75); font-size:12px; line-height:1.4; }
     .modal a{ color: var(--p2); font-weight:900; text-decoration:none; }
-
-    /* SPLASH */
-    #splash{
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:
-        radial-gradient(900px 520px at 50% -10%, rgba(124,58,237,.30), transparent 60%),
-        radial-gradient(700px 460px at 80% 10%, rgba(34,211,238,.20), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      z-index:100;
-      overflow:hidden;
-    }
-    /* star layer */
-    #splash::before{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.80), transparent 60%),
-        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.55), transparent 60%),
-        radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,.70), transparent 60%),
-        radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,.50), transparent 60%),
-        radial-gradient(2px 2px at 45% 55%, rgba(255,255,255,.35), transparent 60%),
-        radial-gradient(1px 1px at 55% 10%, rgba(255,255,255,.60), transparent 60%),
-        radial-gradient(1px 1px at 15% 65%, rgba(255,255,255,.45), transparent 60%),
-        radial-gradient(2px 2px at 85% 15%, rgba(255,255,255,.28), transparent 60%),
-        radial-gradient(1px 1px at 65% 85%, rgba(255,255,255,.42), transparent 60%);
-      opacity:.55;
-      filter: blur(.2px);
-      transform: rotate(-6deg);
-      pointer-events:none;
-      animation: starDrift 8s ease-in-out infinite alternate;
-    }
-    @keyframes starDrift{
-      from{ transform: translateY(-10px) rotate(-6deg); opacity:.45; }
-      to{ transform: translateY(10px) rotate(-6deg); opacity:.65; }
-    }
-
-    #splash.fadeOut{
-      animation: splashFade .55s ease forwards;
-    }
-    @keyframes splashFade{
-      to{ opacity:0; transform: scale(1.02); }
-    }
-
-    .splashBox{
-      width:min(360px, 90vw);
-      text-align:center;
-      padding: 18px 16px 16px;
-      position:relative;
-      z-index:2;
-    }
-    .sLogo{
-      width:92px;height:92px;
-      border-radius:26px;
-      margin: 0 auto 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      box-shadow: 0 18px 48px rgba(0,0,0,.45);
-      overflow:hidden;
-      display:grid;place-items:center;
-    }
-    .sLogo img{ width:100%;height:100%;object-fit:cover;display:block; }
-    .sText{
-      font-weight:900;
-      letter-spacing:.2px;
-      margin:0 0 10px;
-      color: rgba(241,241,255,.92);
-      font-size:14px;
-    }
-    .sBar{
-      height: 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-      overflow:hidden;
-      box-shadow: 0 16px 40px rgba(0,0,0,.25);
-    }
-    .sFill{
-      height:100%;
-      width: 0%;
-      border-radius: 999px;
-
-      /* тёмно-серый -> белый */
-      background: linear-gradient(90deg,
-        rgba(65,65,72,.95),
-        rgba(120,120,135,.85),
-        rgba(255,255,255,.95)
-      );
-
-      position:relative;
-      overflow:hidden;
-
-      animation:
-        loadingFill var(--loadDur) linear forwards,
-        fillToWhite var(--loadDur) linear forwards;
-    }
-    .sFill::after{
-      content:"";
-      position:absolute;
-      inset:-40% -30%;
-      background: radial-gradient(closest-side, rgba(255,255,255,.40), transparent 65%);
-      transform: translateX(-40%) rotate(12deg);
-      animation: sheen 1.2s ease-in-out infinite;
-      opacity:.55;
-    }
-    @keyframes loadingFill { to { width: 100%; } }
-    @keyframes sheen{
-      0%{ transform: translateX(-40%) rotate(12deg); }
-      100%{ transform: translateX(140%) rotate(12deg); }
-    }
-    @keyframes fillToWhite{
-      0%, 85% { filter: brightness(1); }
-      100% { filter: brightness(1.35); }
-    }
-
-    .sHint{
-      margin-top:10px;
-      font-size:12px;
-      color: rgba(241,241,255,.65);
-    }
   </style>
 </head>
 
 <body>
-  <!-- Splash -->
-  <div id="splash" style="--loadDur: 6s;">
-    <div class="splashBox">
-      <div class="sLogo">
-        <img src="logo.png" alt="logo" onerror="this.style.display='none'; this.parentElement.textContent='🟣';" />
-      </div>
-      <p class="sText">Welcome to TonSecretShop</p>
-      <div class="sBar"><div class="sFill"></div></div>
-      <div class="sHint">Preparing experience…</div>
-    </div>
-  </div>
-
   <div class="wrap">
     <div class="top">
       <div class="brand">
@@ -472,7 +363,6 @@
           <p class="sub" id="helloLine">Design services • Web3 vibe</p>
         </div>
       </div>
-      <!-- убрали tg mini app -->
     </div>
 
     <div class="tabs" role="tablist">
@@ -485,14 +375,15 @@
     <section class="screen active" id="services">
       <div class="card">
         <div class="note">
-          Выбери услугу → выбери вариант → нажми “Заказать” → откроется Telegram с готовым текстом заявки.
+          Выбери услугу → выбери вариант → нажми “Заказать” → откроется Telegram с готовым текстом сообщения.
         </div>
+        <div class="foot">Сообщение уходит тебе в личку: @Rapgospod</div>
       </div>
 
       <div class="grid">
 
         <!-- Stickers -->
-        <div class="card" data-service="Стикеры / Emoji">
+        <div class="card" data-service="Стикеры / Emoji" data-thumb="stickersEmoj.png">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -506,7 +397,10 @@
               <h3>⭐️ Стикеры / Emoji</h3>
               <p>Статичные и анимированные. Под Telegram, под стиль проекта.</p>
 
-              <div class="thumb">Место под примеры (фото/гиф)</div>
+              <div class="thumb">
+                <img src="stickersEmoj.png" alt="stickers" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="ph">Место под примеры (stickersEmoj.png)</div>
+              </div>
 
               <div class="priceTitle">Варианты:</div>
               <div class="options" data-options>
@@ -525,7 +419,7 @@
         </div>
 
         <!-- Design -->
-        <div class="card" data-service="Дизайн проекта">
+        <div class="card" data-service="Дизайн проекта" data-thumb="AvatarsLogo.png">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -538,7 +432,10 @@
               <h3>🌸 Дизайн проекта</h3>
               <p>Обои, аватар, оформление Telegram/соцсетей, баннеры.</p>
 
-              <div class="thumb">Место под примеры (фото)</div>
+              <div class="thumb">
+                <img src="AvatarsLogo.png" alt="design" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="ph">Место под примеры (AvatarsLogo.png)</div>
+              </div>
 
               <div class="priceTitle">Варианты:</div>
               <div class="options" data-options>
@@ -556,7 +453,7 @@
         </div>
 
         <!-- Animation -->
-        <div class="card" data-service="Анимация">
+        <div class="card" data-service="Анимация" data-thumb="animations.png">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -568,7 +465,10 @@
               <h3>🎬 Анимация</h3>
               <p>Лупы, интро, промо, анимации под Telegram/соцсети.</p>
 
-              <div class="thumb">Место под примеры (gif/video)</div>
+              <div class="thumb">
+                <img src="animations.png" alt="motion" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="ph">Место под примеры (animations.png)</div>
+              </div>
 
               <div class="priceTitle">Варианты:</div>
               <div class="options" data-options>
@@ -588,7 +488,7 @@
         </div>
 
         <!-- Web3 -->
-        <div class="card" data-service="Web3 / NFT дизайн">
+        <div class="card" data-service="Web3 / NFT дизайн" data-thumb="Web3NFT.png">
           <div class="service">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -601,7 +501,10 @@
               <h3>💎 Web3 / NFT дизайн</h3>
               <p>Коллекции, постеры, баннеры, карточки, мерч-визуалы. Цена обсуждается индивидуально.</p>
 
-              <div class="thumb">Место под примеры</div>
+              <div class="thumb">
+                <img src="Web3NFT.png" alt="web3" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="ph">Место под примеры (Web3NFT.png)</div>
+              </div>
 
               <div class="priceTitle">Варианты:</div>
               <div class="options" data-options>
@@ -623,32 +526,51 @@
     <section class="screen" id="portfolio">
       <div class="card">
         <div class="note">
-          Плитки кликабельные. Потом заменишь на картинки и добавим ссылки на стикеры/канал.
+          Плитки кликабельные. Сейчас подгружаем превью work1.png … work6.png.
         </div>
       </div>
 
       <div class="card">
         <div class="portfolioGrid">
-          <div class="work" data-work-title="Стикеры статичные" data-work-desc="Тут будет описание кейса + ссылки на стикер/канал." data-work-link="">
-            Work #1
+
+          <div class="work" data-work-title="Work #1" data-work-desc="Описание кейса + ссылки" data-work-link="">
+            <img src="work1.png" alt="work1" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+            <div class="ph">work1.png</div>
+            <div class="label">Work #1</div>
           </div>
+
           <div class="work" data-work-title="Work #2" data-work-desc="Описание кейса + ссылки" data-work-link="">
-            Work #2
+            <img src="work2.png" alt="work2" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+            <div class="ph">work2.png</div>
+            <div class="label">Work #2</div>
           </div>
+
           <div class="work" data-work-title="Work #3" data-work-desc="Описание кейса + ссылки" data-work-link="">
-            Work #3
+            <img src="work3.png" alt="work3" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+            <div class="ph">work3.png</div>
+            <div class="label">Work #3</div>
           </div>
+
           <div class="work" data-work-title="Work #4" data-work-desc="Описание кейса + ссылки" data-work-link="">
-            Work #4
+            <img src="work4.png" alt="work4" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+            <div class="ph">work4.png</div>
+            <div class="label">Work #4</div>
           </div>
+
           <div class="work" data-work-title="Work #5" data-work-desc="Описание кейса + ссылки" data-work-link="">
-            Work #5
+            <img src="work5.png" alt="work5" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+            <div class="ph">work5.png</div>
+            <div class="label">Work #5</div>
           </div>
+
           <div class="work" data-work-title="Work #6" data-work-desc="Описание кейса + ссылки" data-work-link="">
-            Work #6
+            <img src="work6.png" alt="work6" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+            <div class="ph">work6.png</div>
+            <div class="label">Work #6</div>
           </div>
+
         </div>
-        <div class="foot">Дальше можем сделать категории и фильтр.</div>
+        <div class="foot">Позже добавим подписи вместо Work# и ссылки на стикеры/канал.</div>
       </div>
     </section>
 
@@ -658,17 +580,17 @@
         <h3 style="margin:0 0 8px;font-size:14px;font-weight:900">Как заказать</h3>
         <div class="note" style="margin-top:0">
           1) Выбери услугу и вариант<br/>
-          2) Нажми “Заказать” — откроется Telegram с текстом заявки<br/>
+          2) Нажми “Заказать” — откроется чат с @Rapgospod с готовым текстом<br/>
           3) Мы уточним детали и сроки
         </div>
 
         <div class="row">
-          <button class="btn" id="openBotBtn">Открыть чат с ботом</button>
+          <button class="btn" id="openMeBtn">Открыть чат @Rapgospod</button>
           <button class="btn secondary" id="copyTemplateBtn">Скопировать шаблон</button>
         </div>
 
         <div class="note">
-          <b>Шаблон заявки:</b><br/>
+          <b>Шаблон:</b><br/>
           Услуга: …<br/>
           Вариант/цена: …<br/>
           Стиль/референсы: …<br/>
@@ -676,10 +598,9 @@
           Дедлайн: …<br/>
           Бюджет: …<br/>
         </div>
-
-        <div class="foot">Бот: @TSS_SHOPbot</div>
       </div>
 
+      <!-- promo block mp4 -->
       <div class="card">
         <div class="note" style="margin:0 0 10px">
           Промо-блок: загрузи <b>promo.mp4</b> (или запасной <b>promo.gif</b>) рядом с index.html
@@ -692,7 +613,7 @@
 
           <img id="promoGif" src="promo.gif" alt="promo" style="display:none;" />
 
-          <div id="promoFallback" style="display:none; padding:14px;">promo.mp4 (placeholder)</div>
+          <div id="promoFallback" class="ph" style="display:none;">promo.mp4 / promo.gif (placeholder)</div>
         </div>
       </div>
     </section>
@@ -716,33 +637,19 @@
     const tg = window.Telegram?.WebApp;
     if (tg) tg.expand();
 
-    // ===== Splash duration (random 4-8 sec)
-    const splash = document.getElementById("splash");
-    const dur = (Math.floor(Math.random() * 5) + 4); // 4..8
-    if (splash) splash.style.setProperty("--loadDur", dur + "s");
-    const SPLASH_MS = dur * 1000;
-
-    setTimeout(() => {
-      const s = document.getElementById("splash");
-      if (!s) return;
-      s.classList.add("fadeOut");
-      setTimeout(()=> s.style.display="none", 600);
-    }, SPLASH_MS);
-
     // greeting
     const u = tg?.initDataUnsafe?.user;
     if (u?.first_name) {
       document.getElementById("helloLine").textContent = `Hi, ${u.first_name} • Design services • Web3 vibe`;
     }
 
-    // ===== Tabs
+    // Tabs
     const tabs = Array.from(document.querySelectorAll(".tab"));
     const screens = {
       services: document.getElementById("services"),
       portfolio: document.getElementById("portfolio"),
       order: document.getElementById("order"),
     };
-
     function setTab(name){
       tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
       Object.entries(screens).forEach(([k, el]) => el.classList.toggle("active", k === name));
@@ -750,24 +657,25 @@
     }
     tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
 
-    // ===== Bot
-    const BOT_USERNAME = "TSS_SHOPbot";
+    // ===== SEND ORDER TO @Rapgospod with prefilled text
+    const TARGET_USER = "Rapgospod"; // без @
 
     function buildOrderText(serviceName, optionText){
       return [
-        "🛒 Заявка Ton Secret Shop",
-        "Услуга: " + serviceName,
-        "Вариант/цена: " + optionText,
-        "Стиль/референсы: ",
-        "Кол-во/формат: ",
-        "Дедлайн: ",
-        "Бюджет: ",
+        "🛒 Ton Secret Shop — new order",
+        "Service: " + serviceName,
+        "Option/Price: " + optionText,
+        "Style/refs: ",
+        "Qty/format: ",
+        "Deadline: ",
+        "Budget: ",
       ].join("\n");
     }
 
-    // ПК/desktop надежнее через location
-    function openShare(text){
-      const url = "https://t.me/share/url?url=&text=" + encodeURIComponent(text);
+    // самый надежный способ на ПК и в Telegram Desktop:
+    // открываем прямой deeplink на username с text=
+    function openChatWithText(username, text){
+      const url = "https://t.me/" + username + "?text=" + encodeURIComponent(text);
       try{
         if (tg?.openTelegramLink) tg.openTelegramLink(url);
         else window.location.href = url;
@@ -776,45 +684,44 @@
       }
     }
 
-    // options per card
+    // Options per card
     document.querySelectorAll("[data-options]").forEach(optWrap => {
       const opts = Array.from(optWrap.querySelectorAll(".opt"));
       opts.forEach(btn => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
           opts.forEach(o => o.classList.remove("active"));
           btn.classList.add("active");
         });
       });
     });
 
-    // order buttons
+    // Order buttons (делаем и click и pointerup — на некоторых десктопах Telegram так надежнее)
     document.querySelectorAll("[data-order]").forEach(btn => {
-      btn.addEventListener("click", () => {
+      const handler = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const card = btn.closest(".card");
-        const serviceName = card?.dataset?.service || "Услуга";
+        const serviceName = card?.dataset?.service || "Service";
         const activeOpt = card?.querySelector(".opt.active");
-        const optionText = activeOpt?.dataset?.opt || "Индивидуально";
-        openShare(buildOrderText(serviceName, optionText));
-      });
+        const optionText = activeOpt?.dataset?.opt || "Custom";
+        openChatWithText(TARGET_USER, buildOrderText(serviceName, optionText));
+      };
+      btn.addEventListener("click", handler);
+      btn.addEventListener("pointerup", handler);
+      btn.addEventListener("touchend", handler);
     });
 
-    // more
+    // More
     document.querySelectorAll("[data-more]").forEach(btn => {
       btn.addEventListener("click", () => alert("Скоро добавим подробное описание и примеры: " + btn.dataset.more));
     });
 
-    // open bot
-    document.getElementById("openBotBtn").addEventListener("click", () => {
-      const url = "https://t.me/" + BOT_USERNAME;
-      try{
-        if (tg?.openTelegramLink) tg.openTelegramLink(url);
-        else window.location.href = url;
-      }catch(e){
-        window.location.href = url;
-      }
+    // Order tab buttons
+    document.getElementById("openMeBtn").addEventListener("click", () => {
+      openChatWithText(TARGET_USER, buildOrderText("…", "…"));
     });
 
-    // copy template
     document.getElementById("copyTemplateBtn").addEventListener("click", async () => {
       const template = buildOrderText("…", "…");
       try{
@@ -832,26 +739,25 @@
       const f = document.getElementById("promoFallback");
       if (!v) return;
 
-      const failToGif = () => {
+      const showFallback = () => {
         v.style.display = "none";
-        if (g) g.style.display = "block";
-        if (f) f.style.display = "none";
+        if (g) g.style.display = "none";
+        if (f) f.style.display = "grid";
       };
 
       v.addEventListener("error", () => {
-        failToGif();
-        // если и gif не загрузится — покажем placeholder
+        // mp4 failed -> try gif
+        v.style.display = "none";
+        if (g) g.style.display = "block";
+        if (f) f.style.display = "none";
+
         if (g){
-          g.onerror = () => {
-            g.style.display = "none";
-            if (f){ f.style.display = "grid"; f.style.placeItems="center"; }
-          };
-        } else if (f){
-          f.style.display = "grid"; f.style.placeItems="center";
+          g.onerror = () => showFallback();
+        } else {
+          showFallback();
         }
       });
 
-      // если autoplay где-то запрещён, попробуем руками
       v.addEventListener("canplay", async () => {
         try { await v.play(); } catch(e) {}
       });
