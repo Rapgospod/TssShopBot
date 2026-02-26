@@ -14,15 +14,10 @@
       --muted:#b7b5d4;
       --stroke:rgba(255,255,255,.10);
       --shadow: 0 18px 48px rgba(0,0,0,.55);
-
       --p1:#7c3aed;
       --p2:#22d3ee;
-
       --cardA: rgba(255,255,255,.06);
       --cardB: rgba(255,255,255,.03);
-
-      --ok:#22c55e;
-      --warn:#f59e0b;
     }
 
     *{box-sizing:border-box}
@@ -43,21 +38,24 @@
     }
     .wrap{ width:min(460px,100%); }
 
+    /* Debug HUD */
+    #dbg{
+      position:fixed; left:10px; bottom:10px; right:10px;
+      padding:10px 12px;
+      border-radius:16px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.92);
+      font-size:12px;
+      display:none;
+      z-index:9999;
+      white-space:pre-line;
+    }
+
     /* Header */
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:12px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-      flex:1;
-    }
+    .top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:0; flex:1; }
     .logo{
       width:46px;height:46px;border-radius:16px;
       background: rgba(255,255,255,.05);
@@ -68,36 +66,17 @@
     .logo img{ width:100%;height:100%; object-fit:cover; display:block; }
     .titleWrap{ min-width:0; flex:1; }
     .title{
-      margin:0;
-      font-weight:900;
-      font-size:16px;
-      letter-spacing:.2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      margin:0; font-weight:900; font-size:16px; letter-spacing:.2px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
-    .subRow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-top:4px;
-    }
+    .subRow{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:4px; }
     .sub{
-      margin:0;
-      font-size:12px;
-      color:var(--muted);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      flex:1;
+      margin:0; font-size:12px; color:var(--muted);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1;
     }
-    .hdrBtns{
-      display:flex; gap:8px; flex:0 0 auto;
-    }
+    .hdrBtns{ display:flex; gap:8px; flex:0 0 auto; }
     .iconBtn{
-      width:38px;height:38px;
-      border-radius:14px;
+      width:38px;height:38px;border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       color: rgba(241,241,255,.92);
@@ -112,39 +91,26 @@
 
     /* Tabs */
     .tabs{
-      display:flex;
-      gap:8px;
-      padding:8px;
-      border-radius:18px;
+      display:flex; gap:8px; padding:8px; border-radius:18px;
       background: rgba(255,255,255,.05);
       border:1px solid var(--stroke);
       box-shadow: 0 12px 34px rgba(0,0,0,.35);
       margin-bottom:12px;
-      position:sticky;
-      top:10px;
+      position:sticky; top:10px;
       backdrop-filter: blur(10px);
       z-index:2;
     }
     .tab{
-      flex:1;
-      border:none;
-      background: transparent;
+      flex:1; border:none; background: transparent;
       color: rgba(241,241,255,.78);
-      font-weight:900;
-      padding:12px 10px;
-      border-radius:16px;
-      cursor:pointer;
-      font-size:13px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
+      font-weight:900; padding:12px 10px;
+      border-radius:16px; cursor:pointer; font-size:13px;
+      display:flex; align-items:center; justify-content:center; gap:8px;
       -webkit-tap-highlight-color: transparent;
       user-select:none;
     }
     .tab .dot{
-      width:10px;height:10px;
-      border-radius:3px;
+      width:10px;height:10px;border-radius:3px;
       background: rgba(255,255,255,.00);
       border:1px solid rgba(255,255,255,.00);
       flex:0 0 auto;
@@ -177,12 +143,10 @@
 
     .service{ display:flex; gap:12px; align-items:flex-start; }
     .icon{
-      width:44px;height:44px;
-      border-radius:16px;
+      width:44px;height:44px;border-radius:16px;
       border:1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(124,58,237,.22), rgba(34,211,238,.10));
-      display:grid;
-      place-items:center;
+      display:grid; place-items:center;
       flex:0 0 auto;
       box-shadow: 0 16px 44px rgba(0,0,0,.35);
     }
@@ -190,7 +154,6 @@
     .service h3{ margin:0; font-size:14px; font-weight:900; letter-spacing:.2px; }
     .service p{ margin:6px 0 0; color: var(--muted); font-size:12px; line-height:1.35; }
 
-    /* previews */
     .thumb{
       margin-top:10px;
       width:100%;
@@ -214,40 +177,22 @@
       border-radius:16px;
     }
     .thumb .ph{
-      position:absolute;
-      inset:0;
-      display:none;
-      place-items:center;
-      padding:10px;
-      text-align:center;
+      position:absolute; inset:0;
+      display:none; place-items:center;
+      padding:10px; text-align:center;
       color: rgba(241,241,255,.62);
       background: rgba(0,0,0,.10);
       backdrop-filter: blur(2px);
     }
 
-    /* price options */
-    .priceTitle{
-      margin-top:10px;
-      font-size:12px;
-      color: rgba(241,241,255,.85);
-      font-weight:900;
-    }
-    .options{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
+    .priceTitle{ margin-top:10px; font-size:12px; color: rgba(241,241,255,.85); font-weight:900; }
+    .options{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
     .opt{
-      border:none;
-      cursor:pointer;
-      padding:8px 10px;
-      border-radius:14px;
+      border:none; cursor:pointer; padding:8px 10px; border-radius:14px;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
       color: rgba(241,241,255,.85);
-      font-weight:900;
-      font-size:12px;
+      font-weight:900; font-size:12px;
       -webkit-tap-highlight-color: transparent;
       user-select:none;
     }
@@ -258,22 +203,16 @@
       box-shadow: 0 16px 44px rgba(124,58,237,.14);
     }
 
-    /* Qty + actions */
     .row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; align-items:center; }
     .btn{
-      border:none;
-      cursor:pointer;
-      font-weight:900;
-      font-size:13px;
+      border:none; cursor:pointer;
+      font-weight:900; font-size:13px;
       padding:12px 14px;
       border-radius:16px;
       color:#05050a;
       background: linear-gradient(90deg, rgba(124,58,237,1), rgba(34,211,238,1));
       box-shadow: 0 16px 44px rgba(124,58,237,.20);
       flex: 1 1 160px;
-      position:relative;
-      z-index:5;
-      pointer-events:auto;
       user-select:none;
       -webkit-tap-highlight-color: transparent;
     }
@@ -285,18 +224,14 @@
     }
 
     .qtyWrap{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 10px;
-      border-radius:16px;
+      display:flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:16px;
       background: rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.10);
-      flex: 0 0 auto;
+      flex:0 0 auto;
     }
     .qtyBtn{
-      width:34px;height:34px;
-      border-radius:14px;
+      width:34px;height:34px;border-radius:14px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       color: rgba(241,241,255,.92);
@@ -305,100 +240,58 @@
       user-select:none;
       -webkit-tap-highlight-color: transparent;
     }
-    .qtyVal{
-      min-width:22px;
-      text-align:center;
-      font-weight:900;
-      color: rgba(241,241,255,.92);
-      font-size:13px;
-    }
+    .qtyVal{ min-width:22px; text-align:center; font-weight:900; color: rgba(241,241,255,.92); font-size:13px; }
 
-    /* Screens */
     .screen{ display:none; }
     .screen.active{ display:block; }
 
     /* Cart */
-    .cartHead{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:8px;
-    }
-    .cartHead h3{
-      margin:0;
-      font-size:13px;
-      font-weight:900;
-      letter-spacing:.2px;
-    }
+    .cartHead{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+    .cartHead h3{ margin:0; font-size:13px; font-weight:900; letter-spacing:.2px; }
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
-      font-size:12px;
-      color: rgba(241,241,255,.80);
-      font-weight:900;
+      font-size:12px; color: rgba(241,241,255,.80); font-weight:900;
       user-select:none;
     }
-    .cartList{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      margin-top:10px;
-    }
+    .cartList{ display:flex; flex-direction:column; gap:8px; margin-top:10px; }
     .cartItem{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      padding:10px;
-      border-radius:16px;
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      padding:10px; border-radius:16px;
       background: rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.08);
     }
     .cartItem b{ display:block; font-size:12px; }
     .cartItem span{ display:block; font-size:11px; color: rgba(241,241,255,.70); margin-top:2px; }
     .miniBtn{
-      border:none;
-      cursor:pointer;
-      border-radius:12px;
-      padding:8px 10px;
+      border:none; cursor:pointer;
+      border-radius:12px; padding:8px 10px;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
       color: rgba(241,241,255,.90);
-      font-weight:900;
-      font-size:12px;
-      -webkit-tap-highlight-color: transparent;
+      font-weight:900; font-size:12px;
       user-select:none;
+      -webkit-tap-highlight-color: transparent;
       flex:0 0 auto;
     }
     .miniBtn.danger{ color:#fff; background: rgba(239,68,68,.18); border-color: rgba(239,68,68,.25); }
     .total{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-top:10px;
-      padding-top:10px;
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top:10px; padding-top:10px;
       border-top:1px solid rgba(255,255,255,.10);
-      font-weight:900;
-      color: rgba(241,241,255,.92);
-      font-size:13px;
+      font-weight:900; color: rgba(241,241,255,.92); font-size:13px;
     }
     .mutedSmall{ font-size:11px; color: rgba(241,241,255,.55); margin-top:6px; }
 
     /* Portfolio */
     .portfolioGrid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
     .work{
-      border-radius:16px;
-      border:1px dashed rgba(255,255,255,.18);
+      border-radius:16px; border:1px dashed rgba(255,255,255,.18);
       background: rgba(255,255,255,.04);
       aspect-ratio: 1 / 1;
-      display:grid;
-      place-items:center;
+      display:grid; place-items:center;
       color: rgba(241,241,255,.65);
       font-size:12px;
       overflow:hidden;
@@ -410,54 +303,51 @@
     .work:active{ transform: scale(0.99); }
     .work img{ width:100%;height:100%;object-fit:cover;display:block; }
     .work .label{
-      position:absolute;
-      left:10px;
-      bottom:10px;
-      padding:6px 10px;
-      border-radius:999px;
+      position:absolute; left:10px; bottom:10px;
+      padding:6px 10px; border-radius:999px;
       background: rgba(0,0,0,.35);
       border:1px solid rgba(255,255,255,.12);
       color: rgba(241,241,255,.92);
-      font-weight:900;
-      font-size:11px;
+      font-weight:900; font-size:11px;
       backdrop-filter: blur(8px);
     }
     .work .ph{
-      position:absolute;
-      inset:0;
-      display:none;
-      place-items:center;
-      text-align:center;
-      padding:10px;
+      position:absolute; inset:0;
+      display:none; place-items:center;
+      text-align:center; padding:10px;
       color: rgba(241,241,255,.62);
       background: rgba(0,0,0,.10);
       backdrop-filter: blur(2px);
     }
 
-    /* ===== Liquid Glass modal (shared look) ===== */
+    /* Liquid glass backdrops (IMPORTANT: no click stealing when hidden) */
     .backdrop{
       position:fixed; inset:0;
       background: rgba(0,0,0,.50);
-      display:none;
+      display:flex;
       align-items:flex-end;
       justify-content:center;
       padding:14px;
       z-index:50;
+
       opacity:0;
       transform: translateY(8px);
       transition: opacity .28s ease, transform .28s ease;
+
+      visibility:hidden;
+      pointer-events:none;
     }
     .backdrop.show{
-      display:flex;
       opacity:1;
       transform: translateY(0);
+      visibility:visible;
+      pointer-events:auto;
     }
     .wrap.modalOpen{
       transition: transform .28s ease, filter .28s ease;
       transform: scale(.985);
       filter: blur(1.2px) saturate(1.05);
     }
-
     .modal{
       width:min(460px,100%);
       border-radius:22px;
@@ -470,30 +360,13 @@
       opacity:0;
       transition: transform .28s ease, opacity .28s ease;
     }
-    .backdrop.show .modal{
-      transform: translateY(0) scale(1);
-      opacity:1;
-    }
-    .modalHead{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:8px;
-    }
+    .backdrop.show .modal{ transform: translateY(0) scale(1); opacity:1; }
+    .modalHead{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
     .modalHead h2{ margin:0; font-size:14px; font-weight:900; }
-    .x{
-      border:none;
-      background:transparent;
-      color:#fff;
-      font-size:22px;
-      cursor:pointer;
-      opacity:.85;
-    }
+    .x{ border:none; background:transparent; color:#fff; font-size:22px; cursor:pointer; opacity:.85; }
     .modal p{ margin:10px 0 0; color:rgba(241,241,255,.78); font-size:12px; line-height:1.45; }
     .modal a{ color: var(--p2); font-weight:900; text-decoration:none; }
 
-    /* image inside modal + “дороже” micro zoom */
     .mImg{
       width:100%;
       aspect-ratio: 1 / 1;
@@ -521,28 +394,22 @@
       to{ transform: scale(1.02); filter: saturate(1.00); }
     }
 
-    /* ===== Order inner tabs ===== */
+    /* Order inner tabs */
     .subTabs{
-      display:flex;
-      gap:8px;
-      padding:8px;
-      border-radius:18px;
+      display:flex; gap:8px; padding:8px; border-radius:18px;
       background: rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.10);
       margin-bottom:12px;
       backdrop-filter: blur(10px);
     }
     .subTab{
-      flex:1;
-      border:none;
-      cursor:pointer;
-      border-radius:16px;
-      padding:10px 10px;
+      flex:1; border:none; cursor:pointer;
+      border-radius:16px; padding:10px 10px;
       font-weight:900;
       color: rgba(241,241,255,.78);
       background: transparent;
-      -webkit-tap-highlight-color: transparent;
       user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
     .subTab.active{
       color:#fff;
@@ -550,7 +417,6 @@
       border:1px solid rgba(255,255,255,.10);
       box-shadow: 0 16px 44px rgba(124,58,237,.14);
     }
-
     .progressWrap{
       margin-top:10px;
       height:12px;
@@ -567,7 +433,7 @@
       transition: width .25s ease;
     }
 
-    /* ===== Inventory slots ===== */
+    /* Inventory */
     .invGrid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -585,8 +451,6 @@
       font-size:11px;
       text-align:center;
       padding:10px;
-      position:relative;
-      overflow:hidden;
     }
     .bubble{
       margin-top:10px;
@@ -599,13 +463,10 @@
       line-height:1.35;
     }
 
-    /* ===== Splash “ещё дороже” ===== */
+    /* Splash */
     #splash{
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      position:fixed; inset:0;
+      display:flex; align-items:center; justify-content:center;
       background:
         radial-gradient(900px 520px at 50% -10%, rgba(124,58,237,.33), transparent 60%),
         radial-gradient(700px 460px at 80% 10%, rgba(34,211,238,.22), transparent 55%),
@@ -613,116 +474,73 @@
       z-index:999;
       overflow:hidden;
     }
-    #starfield{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:.95;
-    }
+    #starfield{ position:absolute; inset:0; pointer-events:none; opacity:.98; }
     .star{
-      position:absolute;
-      border-radius:999px;
+      position:absolute; border-radius:999px;
       background: rgba(255,255,255,.98);
-      box-shadow:
-        0 0 10px rgba(255,255,255,.55),
-        0 0 24px rgba(255,255,255,.22);
+      box-shadow: 0 0 10px rgba(255,255,255,.55), 0 0 24px rgba(255,255,255,.22);
       opacity:.0;
       animation: starTwinkle var(--tw, 2.6s) ease-in-out infinite;
-      transform: translateZ(0);
     }
-    @keyframes starTwinkle{
-      0%{ opacity: .25; }
-      50%{ opacity: .95; }
-      100%{ opacity: .35; }
-    }
+    @keyframes starTwinkle{ 0%{opacity:.30} 50%{opacity:.98} 100%{opacity:.45} }
 
-    /* grain overlay */
     #splash::after{
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
       mix-blend-mode: overlay;
       opacity:.22;
       pointer-events:none;
     }
-
     #splash.fadeOut{ animation: splashFade .55s ease forwards; }
     @keyframes splashFade{ to{ opacity:0; transform: scale(1.02); } }
 
-    .splashBox{
-      width:min(360px, 90vw);
-      text-align:center;
-      padding: 18px 16px 16px;
-      position:relative;
-      z-index:2;
-    }
+    .splashBox{ width:min(360px, 90vw); text-align:center; padding: 18px 16px 16px; position:relative; z-index:2; }
     .sLogo{
-      width:96px;height:96px;
-      border-radius:28px;
-      margin: 0 auto 14px;
+      width:96px;height:96px;border-radius:28px;
+      margin:0 auto 14px;
       border:1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.06);
-      box-shadow:
-        0 18px 48px rgba(0,0,0,.45),
-        0 0 34px rgba(124,58,237,.22);
+      box-shadow: 0 18px 48px rgba(0,0,0,.45), 0 0 34px rgba(124,58,237,.22);
       overflow:hidden;
       display:grid;place-items:center;
       animation: logoPulse 2.4s ease-in-out infinite;
     }
-    @keyframes logoPulse{
-      0%,100%{ transform: scale(1); filter: saturate(1); }
-      50%{ transform: scale(1.03); filter: saturate(1.10); }
-    }
+    @keyframes logoPulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
     .sLogo img{ width:100%;height:100%;object-fit:cover;display:block; }
-    .sText{
-      font-weight:900;
-      letter-spacing:.2px;
-      margin:0 0 10px;
-      color: rgba(241,241,255,.94);
-      font-size:14px;
-    }
+    .sText{ font-weight:900; letter-spacing:.2px; margin:0 0 10px; color: rgba(241,241,255,.94); font-size:14px; }
     .sBar{
-      height: 14px;
-      border-radius: 999px;
+      height:14px;border-radius:999px;
       background: rgba(255,255,255,.08);
       border:1px solid rgba(255,255,255,.12);
       overflow:hidden;
       box-shadow: 0 16px 40px rgba(0,0,0,.25);
     }
     .sFill{
-      height:100%;
-      width: 0%;
-      border-radius: 999px;
-      background: linear-gradient(90deg,
-        rgba(55,55,62,.96),
-        rgba(115,115,130,.86),
-        rgba(255,255,255,.98)
-      );
-      position:relative;
-      overflow:hidden;
-      animation:
-        loadingFill var(--loadDur) linear forwards,
-        fillToWhite var(--loadDur) linear forwards;
+      height:100%; width:0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(55,55,62,.96), rgba(115,115,130,.86), rgba(255,255,255,.98));
+      position:relative; overflow:hidden;
+      animation: loadingFill var(--loadDur) linear forwards;
     }
     .sFill::after{
       content:"";
-      position:absolute;
-      inset:-40% -30%;
+      position:absolute; inset:-40% -30%;
       background: radial-gradient(closest-side, rgba(255,255,255,.45), transparent 65%);
       transform: translateX(-40%) rotate(12deg);
       animation: sheen 1.1s ease-in-out infinite;
       opacity:.62;
     }
     @keyframes loadingFill{ to{ width:100%; } }
-    @keyframes sheen{ 0%{ transform: translateX(-40%) rotate(12deg); } 100%{ transform: translateX(140%) rotate(12deg); } }
-    @keyframes fillToWhite{ 0%,85%{ filter:brightness(1); } 100%{ filter:brightness(1.40); } }
+    @keyframes sheen{ 0%{transform:translateX(-40%) rotate(12deg)} 100%{transform:translateX(140%) rotate(12deg)} }
     .sHint{ margin-top:10px; font-size:12px; color: rgba(241,241,255,.76); min-height: 16px; }
   </style>
 </head>
 
 <body>
+  <div id="dbg"></div>
+
   <!-- Splash -->
   <div id="splash" style="--loadDur: 6s;">
     <div id="starfield"></div>
@@ -736,22 +554,19 @@
     </div>
   </div>
 
-  <div class="wrap">
+  <div class="wrap" id="app">
     <div class="top">
       <div class="brand">
         <div class="logo">
-          <img src="logo.png" alt="Ton Secret Shop logo"
-               onerror="this.style.display='none'; this.parentElement.textContent='🟣';" />
+          <img src="logo.png" alt="Ton Secret Shop logo" onerror="this.style.display='none'; this.parentElement.textContent='🟣';" />
         </div>
 
         <div class="titleWrap">
-          <p class="title" id="shopName">Ton Secret Shop</p>
-
+          <p class="title">Ton Secret Shop</p>
           <div class="subRow">
-            <p class="sub" id="helloLine">order your future</p>
+            <p class="sub">order your future</p>
             <div class="hdrBtns">
               <button class="iconBtn" id="profileBtn" title="Profile">
-                <!-- user icon -->
                 <svg viewBox="0 0 24 24" fill="none">
                   <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" stroke="white" opacity="0.95" stroke-width="1.7"/>
                   <path d="M20 20a8 8 0 0 0-16 0" stroke="white" opacity="0.95" stroke-width="1.7" stroke-linecap="round"/>
@@ -764,7 +579,7 @@
       </div>
     </div>
 
-    <div class="tabs" role="tablist">
+    <div class="tabs">
       <button class="tab active" data-tab="services"><span>Услуги</span><span class="dot"></span></button>
       <button class="tab" data-tab="portfolio"><span>Портфолио</span><span class="dot"></span></button>
       <button class="tab" data-tab="order"><span>Заказ</span><span class="dot"></span></button>
@@ -774,12 +589,11 @@
     <section class="screen active" id="services">
       <div class="card">
         <div class="note">
-          Выбери услугу → выбери вариант → поставь количество → добавь в корзину или жми “Заказать”.
+          Выбери вариант → количество → “В корзину” или “Заказать”.
         </div>
-        <div class="foot">Сообщение уходит тебе в личку: @Rapgospod</div>
+        <div class="foot">Отправка заказа в личку: @Rapgospod</div>
       </div>
 
-      <!-- Cart -->
       <div class="card" id="cartCard">
         <div class="cartHead">
           <h3>🛒 Корзина</h3>
@@ -788,9 +602,9 @@
         <div class="cartList" id="cartList"></div>
         <div class="total">
           <span>Total:</span>
-          <span id="cartTotal">$0</span>
+          <span id="cartTotal">$0.00</span>
         </div>
-        <div class="mutedSmall" id="cartHint">Пока пусто. Добавь услуги — и можно “Заказать”.</div>
+        <div class="mutedSmall" id="cartHint">Пока пусто.</div>
         <div class="row" style="margin-top:12px;">
           <button class="btn" id="orderFromCartBtn">Заказать из корзины</button>
           <button class="btn secondary" id="clearCartBtn">Очистить</button>
@@ -799,20 +613,18 @@
 
       <div class="grid">
 
-        <!-- Stickers -->
-        <div class="card" data-service="Стикеры / Emoji">
+        <!-- 1 -->
+        <div class="card serviceCard" data-service="Стикеры / Emoji">
           <div class="service">
-            <div class="icon" aria-hidden="true">
+            <div class="icon">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M7 3h7a7 7 0 0 1 7 7v7a4 4 0 0 1-4 4H10a7 7 0 0 1-7-7V7a4 4 0 0 1 4-4Z" stroke="white" opacity="0.9" stroke-width="1.7"/>
                 <path d="M14 3v5a4 4 0 0 0 4 4h5" stroke="white" opacity="0.9" stroke-width="1.7"/>
-                <path d="M8 14c1.2 1.2 2.5 1.8 4 1.8S14.8 15.2 16 14" stroke="white" opacity="0.9" stroke-width="1.7" stroke-linecap="round"/>
-                <path d="M9 10h.01M15 10h.01" stroke="white" opacity="0.9" stroke-width="3" stroke-linecap="round"/>
               </svg>
             </div>
             <div>
               <h3>⭐️ Стикеры / Emoji</h3>
-              <p>Статичные и анимированные. Под Telegram, под стиль проекта.</p>
+              <p>Статичные и анимированные. Под Telegram.</p>
 
               <div class="thumb">
                 <img src="stickersEmoj.png" alt="stickers"
@@ -821,7 +633,7 @@
               </div>
 
               <div class="priceTitle">Варианты:</div>
-              <div class="options" data-options>
+              <div class="options">
                 <button class="opt active" data-opt="Статичный стикер — $6.5">Стат. стикер $6.5</button>
                 <button class="opt" data-opt="Статичный эмодзи — $7.5">Стат. эмодзи $7.5</button>
                 <button class="opt" data-opt="Анимированный tgs стикер — $49">TGS стикер $49</button>
@@ -830,31 +642,29 @@
 
               <div class="row">
                 <div class="qtyWrap">
-                  <button class="qtyBtn" data-qty-minus>−</button>
+                  <button class="qtyBtn" data-act="minus">−</button>
                   <div class="qtyVal" data-qty>1</div>
-                  <button class="qtyBtn" data-qty-plus>+</button>
+                  <button class="qtyBtn" data-act="plus">+</button>
                 </div>
 
-                <button class="btn secondary" data-add>В корзину</button>
-                <button class="btn" data-order>Заказать</button>
+                <button class="btn secondary" data-act="add">В корзину</button>
+                <button class="btn" data-act="order">Заказать</button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Design -->
-        <div class="card" data-service="Дизайн проекта">
+        <!-- 2 -->
+        <div class="card serviceCard" data-service="Дизайн проекта">
           <div class="service">
-            <div class="icon" aria-hidden="true">
+            <div class="icon">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M4 7.5A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5v9A3.5 3.5 0 0 1 16.5 20h-9A3.5 3.5 0 0 1 4 16.5v-9Z" stroke="white" opacity="0.9" stroke-width="1.7"/>
-                <path d="M8 16l2.2-2.2a2 2 0 0 1 2.8 0L16 16" stroke="white" opacity="0.9" stroke-width="1.7" stroke-linecap="round"/>
-                <path d="M9 9h6" stroke="white" opacity="0.9" stroke-width="1.7" stroke-linecap="round"/>
               </svg>
             </div>
             <div>
               <h3>🌸 Дизайн проекта</h3>
-              <p>Обои, аватар, оформление Telegram/соцсетей, баннеры.</p>
+              <p>Аватары, обои, оформление Telegram/соцсетей.</p>
 
               <div class="thumb">
                 <img src="AvatarsLogo.png" alt="design"
@@ -863,30 +673,30 @@
               </div>
 
               <div class="priceTitle">Варианты:</div>
-              <div class="options" data-options>
+              <div class="options">
                 <button class="opt active" data-opt="Заказной арт-аватар — $20">Арт-аватар $20</button>
                 <button class="opt" data-opt="Арт-баннер для поста — $18">Арт-баннер $18</button>
-                <button class="opt" data-opt="Аватар/баннер шаблонный (Photoshop) — $10">Шаблон $10</button>
+                <button class="opt" data-opt="Шаблонный аватар/баннер (Photoshop) — $10">Шаблон $10</button>
               </div>
 
               <div class="row">
                 <div class="qtyWrap">
-                  <button class="qtyBtn" data-qty-minus>−</button>
+                  <button class="qtyBtn" data-act="minus">−</button>
                   <div class="qtyVal" data-qty>1</div>
-                  <button class="qtyBtn" data-qty-plus>+</button>
+                  <button class="qtyBtn" data-act="plus">+</button>
                 </div>
 
-                <button class="btn secondary" data-add>В корзину</button>
-                <button class="btn" data-order>Заказать</button>
+                <button class="btn secondary" data-act="add">В корзину</button>
+                <button class="btn" data-act="order">Заказать</button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Animation -->
-        <div class="card" data-service="Анимация">
+        <!-- 3 -->
+        <div class="card serviceCard" data-service="Анимация">
           <div class="service">
-            <div class="icon" aria-hidden="true">
+            <div class="icon">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v11A2.5 2.5 0 0 1 16.5 20h-9A2.5 2.5 0 0 1 5 17.5v-11Z" stroke="white" opacity="0.9" stroke-width="1.7"/>
                 <path d="M11 9l5 3-5 3V9Z" fill="white" opacity="0.9"/>
@@ -894,7 +704,7 @@
             </div>
             <div>
               <h3>🎬 Анимация</h3>
-              <p>Лупы, интро, промо, анимации под Telegram/соцсети.</p>
+              <p>Лупы, интро, промо под Telegram/соцсети.</p>
 
               <div class="thumb">
                 <img src="animations.png" alt="motion"
@@ -903,41 +713,38 @@
               </div>
 
               <div class="priceTitle">Варианты:</div>
-              <div class="options" data-options>
+              <div class="options">
                 <button class="opt active" data-opt="Арт ролик 5 секунд — $25">5s $25</button>
                 <button class="opt" data-opt="Арт ролик 10 секунд — $50">10s $50</button>
                 <button class="opt" data-opt="Арт ролик 15 секунд — $70">15s $70</button>
                 <button class="opt" data-opt="Арт ролик 30 секунд — $120">30s $120</button>
-                <button class="opt" data-opt="Индивидуально обсуждается">Custom</button>
               </div>
 
               <div class="row">
                 <div class="qtyWrap">
-                  <button class="qtyBtn" data-qty-minus>−</button>
+                  <button class="qtyBtn" data-act="minus">−</button>
                   <div class="qtyVal" data-qty>1</div>
-                  <button class="qtyBtn" data-qty-plus>+</button>
+                  <button class="qtyBtn" data-act="plus">+</button>
                 </div>
 
-                <button class="btn secondary" data-add>В корзину</button>
-                <button class="btn" data-order>Заказать</button>
+                <button class="btn secondary" data-act="add">В корзину</button>
+                <button class="btn" data-act="order">Заказать</button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Web3 -->
-        <div class="card" data-service="Web3 / NFT дизайн">
+        <!-- 4 -->
+        <div class="card serviceCard" data-service="Web3 / NFT дизайн">
           <div class="service">
-            <div class="icon" aria-hidden="true">
+            <div class="icon">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M12 3l8 5v8l-8 5-8-5V8l8-5Z" stroke="white" opacity="0.9" stroke-width="1.7"/>
-                <path d="M12 3v18" stroke="white" opacity="0.35" stroke-width="1.2"/>
-                <path d="M4 8l8 5 8-5" stroke="white" opacity="0.9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
             <div>
               <h3>💎 Web3 / NFT дизайн</h3>
-              <p>Коллекции, постеры, баннеры, карточки, мерч-визуалы. Цена обсуждается индивидуально.</p>
+              <p>Коллекции, баннеры, карточки, постеры. Цена индивидуально.</p>
 
               <div class="thumb">
                 <img src="Web3NFT.png" alt="web3"
@@ -946,19 +753,19 @@
               </div>
 
               <div class="priceTitle">Варианты:</div>
-              <div class="options" data-options>
-                <button class="opt active" data-opt="Индивидуально обсуждается">Индивидуально</button>
+              <div class="options">
+                <button class="opt active" data-opt="Индивидуально (TBD)">Индивидуально</button>
               </div>
 
               <div class="row">
                 <div class="qtyWrap">
-                  <button class="qtyBtn" data-qty-minus>−</button>
+                  <button class="qtyBtn" data-act="minus">−</button>
                   <div class="qtyVal" data-qty>1</div>
-                  <button class="qtyBtn" data-qty-plus>+</button>
+                  <button class="qtyBtn" data-act="plus">+</button>
                 </div>
 
-                <button class="btn secondary" data-add>В корзину</button>
-                <button class="btn" data-order>Заказать</button>
+                <button class="btn secondary" data-act="add">В корзину</button>
+                <button class="btn" data-act="order">Заказать</button>
               </div>
             </div>
           </div>
@@ -970,57 +777,53 @@
     <!-- PORTFOLIO -->
     <section class="screen" id="portfolio">
       <div class="card">
-        <div class="note">Плитки кликабельные. По клику открывается “эпизод” (workXepX.png) и описание.</div>
+        <div class="note">Плитки кликабельные. По клику — “эпизод” workXepX.png и описание.</div>
       </div>
 
       <div class="card">
         <div class="portfolioGrid">
-
           <div class="work"
-            data-work-title="Стикеры статичные"
-            data-ep-img="work1ep1.png"
-            data-work-desc="Стикерпак каналу: t.me/barboskich.ton
+               data-title="Work #1"
+               data-ep="work1ep1.png"
+               data-desc="Стикерпак каналу: t.me/barboskich.ton
 ссылка на стикерпак: t.me/addstickers/BarboskichtonBarboskichTon
 В стикерпаке 51 уникальный стикер, одна из первых объёмных работ Tss
-Владелец канала: https://t.me/barboskich"
-            data-work-link="">
+Владелец канала: https://t.me/barboskich">
             <img src="work1.png" alt="work1" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work1.png</div>
             <div class="label">Work #1</div>
           </div>
 
-          <div class="work" data-work-title="Work #2" data-ep-img="work2ep2.png" data-work-desc="Описание кейса позже" data-work-link="">
+          <div class="work" data-title="Work #2" data-ep="work2ep2.png" data-desc="Описание позже">
             <img src="work2.png" alt="work2" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work2.png</div>
             <div class="label">Work #2</div>
           </div>
 
-          <div class="work" data-work-title="Work #3" data-ep-img="work3ep3.png" data-work-desc="Описание кейса позже" data-work-link="">
+          <div class="work" data-title="Work #3" data-ep="work3ep3.png" data-desc="Описание позже">
             <img src="work3.png" alt="work3" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work3.png</div>
             <div class="label">Work #3</div>
           </div>
 
-          <div class="work" data-work-title="Work #4" data-ep-img="work4ep4.png" data-work-desc="Описание кейса позже" data-work-link="">
+          <div class="work" data-title="Work #4" data-ep="work4ep4.png" data-desc="Описание позже">
             <img src="work4.png" alt="work4" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work4.png</div>
             <div class="label">Work #4</div>
           </div>
 
-          <div class="work" data-work-title="Work #5" data-ep-img="work5ep5.png" data-work-desc="Описание кейса позже" data-work-link="">
+          <div class="work" data-title="Work #5" data-ep="work5ep5.png" data-desc="Описание позже">
             <img src="work5.png" alt="work5" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work5.png</div>
             <div class="label">Work #5</div>
           </div>
 
-          <div class="work" data-work-title="Work #6" data-ep-img="work6ep6.png" data-work-desc="Описание кейса позже" data-work-link="">
+          <div class="work" data-title="Work #6" data-ep="work6ep6.png" data-desc="Описание позже">
             <img src="work6.png" alt="work6" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
             <div class="ph">work6.png</div>
             <div class="label">Work #6</div>
           </div>
-
         </div>
-        <div class="foot">Потом заменим названия/описания и добавим ссылки.</div>
       </div>
     </section>
 
@@ -1031,30 +834,23 @@
         <button class="subTab" data-sub="tasks">Задания</button>
       </div>
 
-      <!-- Order main -->
       <div class="screen active" id="orderMain">
         <div class="card">
           <h3 style="margin:0 0 8px;font-size:14px;font-weight:900">Как заказать</h3>
           <div class="note" style="margin-top:0">
-            1) Добавь услуги в корзину (или жми “Заказать” на карточке)<br/>
-            2) Откроется чат с @Rapgospod и готовым текстом<br/>
+            1) Добавь услуги в корзину<br/>
+            2) Нажми “Заказать из корзины” или открой чат<br/>
             3) Мы уточним детали и сроки
           </div>
 
           <div class="row">
-            <button class="btn" id="openMeBtn">Открыть чат @Rapgospod</button>
-            <button class="btn secondary" id="copyTemplateBtn">Скопировать шаблон</button>
-          </div>
-
-          <div class="note" style="margin-top:10px;color:rgba(241,241,255,.65)">
-            Подсказка: лучше заказывать из корзины — там будет список услуг и количество.
+            <button class="btn" id="openChatBtn">Открыть чат @Rapgospod</button>
+            <button class="btn secondary" id="copyBtn">Скопировать текст</button>
           </div>
         </div>
 
         <div class="card">
-          <div class="note" style="margin:0 0 10px">
-            Картинка для блока: <b>TSSs.png</b> рядом с index.html
-          </div>
+          <div class="note" style="margin:0 0 10px">Картинка блока: <b>TSSs.png</b> рядом с index.html</div>
           <div class="thumb">
             <img src="TSSs.png" alt="TSS"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
@@ -1063,11 +859,10 @@
         </div>
       </div>
 
-      <!-- Tasks -->
       <div class="screen" id="tasks">
         <div class="card">
           <h3 style="margin:0 0 8px;font-size:14px;font-weight:900">Задания</h3>
-          <div class="note">Выполняй — получай секретные бонусы к заказу (пока условно, потом свяжем с реальными скидками/ваучерами).</div>
+          <div class="note">Чек-ин — реально рабочий: 1 раз в день, 5 дней подряд → бонус.</div>
         </div>
 
         <div class="card">
@@ -1075,56 +870,50 @@
             <div>
               <b style="display:block;font-size:13px;">1) Подписаться на @TonSecretShop</b>
               <span style="display:block;font-size:12px;color:rgba(241,241,255,.70);margin-top:4px;">
-                Откроем канал — подпишись и возвращайся.
+                Откроем канал — подпишись и вернись.
               </span>
             </div>
-            <button class="miniBtn" id="taskSubBtn">Open</button>
+            <button class="miniBtn" id="openChannelBtn">Open</button>
           </div>
         </div>
 
         <div class="card">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
-            <div>
+            <div style="flex:1;min-width:0;">
               <b style="display:block;font-size:13px;">2) Чек-ин 5 дней подряд</b>
               <span style="display:block;font-size:12px;color:rgba(241,241,255,.70);margin-top:4px;">
-                Заходи раз в день → жми “Check-in”. Пропустил день — прогресс сбросится.
+                Пропустил день — прогресс сбросится.
               </span>
 
-              <div class="progressWrap" aria-label="checkin progress">
-                <div class="progressFill" id="checkinFill"></div>
+              <div class="progressWrap">
+                <div class="progressFill" id="checkFill"></div>
               </div>
-              <div class="mutedSmall" id="checkinText">0/5</div>
-              <div class="mutedSmall" id="checkinStatus"></div>
+              <div class="mutedSmall" id="checkText">0/5</div>
+              <div class="mutedSmall" id="checkStatus"></div>
             </div>
-            <button class="miniBtn" id="checkinBtn">Check-in</button>
+            <button class="miniBtn" id="checkBtn">Check-in</button>
           </div>
         </div>
       </div>
     </section>
   </div>
 
-  <!-- Portfolio Modal -->
-  <div class="backdrop" id="workBackdrop">
+  <!-- Work modal -->
+  <div class="backdrop" id="workBackdrop" aria-hidden="true">
     <div class="modal">
       <div class="modalHead">
-        <h2 id="mTitle">Work</h2>
-        <button class="x" id="mClose">×</button>
+        <h2 id="wTitle">Work</h2>
+        <button class="x" id="wClose">×</button>
       </div>
-
       <div class="mImg">
-        <img id="mImg" src="" alt="preview" onerror="this.style.display='none';" />
+        <img id="wImg" src="" alt="ep" onerror="this.style.display='none';" />
       </div>
-
-      <p id="mDesc" style="white-space:pre-line;"></p>
-
-      <p id="mLinkWrap" style="display:none;margin-top:10px;">
-        <a id="mLink" href="#" target="_blank" rel="noreferrer">Открыть ссылку</a>
-      </p>
+      <p id="wDesc" style="white-space:pre-line;"></p>
     </div>
   </div>
 
-  <!-- Profile Modal -->
-  <div class="backdrop" id="profileBackdrop">
+  <!-- Profile modal -->
+  <div class="backdrop" id="profileBackdrop" aria-hidden="true">
     <div class="modal">
       <div class="modalHead">
         <h2>Профиль</h2>
@@ -1133,580 +922,419 @@
 
       <div style="display:flex;gap:12px;align-items:center;">
         <div class="logo" style="width:54px;height:54px;border-radius:18px;">
-          <div id="pAvatar" style="width:100%;height:100%;display:grid;place-items:center;font-weight:900;color:#fff;">
-            ?
-          </div>
+          <div id="pAvatar" style="width:100%;height:100%;display:grid;place-items:center;font-weight:900;color:#fff;">?</div>
         </div>
         <div style="min-width:0;">
           <b id="pName" style="display:block;font-size:13px;">User</b>
           <span id="pUser" style="display:block;font-size:12px;color:rgba(241,241,255,.70);margin-top:4px;">@username</span>
-          <span id="pFirstVisit" style="display:block;font-size:11px;color:rgba(241,241,255,.55);margin-top:4px;">First visit: —</span>
+          <span id="pFirst" style="display:block;font-size:11px;color:rgba(241,241,255,.55);margin-top:4px;">First visit: —</span>
         </div>
       </div>
 
-      <div class="bubble">
-        Тут могут быть ваши предметы, скидки, покупки и ваучеры.
-      </div>
+      <div class="bubble">Тут могут быть ваши предметы, скидки, покупки и ваучеры.</div>
 
-      <div class="invGrid" aria-label="inventory">
-        <div class="slot">Slot 1</div>
-        <div class="slot">Slot 2</div>
-        <div class="slot">Slot 3</div>
-        <div class="slot">Slot 4</div>
-        <div class="slot">Slot 5</div>
-        <div class="slot">Slot 6</div>
+      <div class="invGrid">
+        <div class="slot">Slot 1</div><div class="slot">Slot 2</div><div class="slot">Slot 3</div>
+        <div class="slot">Slot 4</div><div class="slot">Slot 5</div><div class="slot">Slot 6</div>
       </div>
 
       <div style="margin-top:12px;">
         <b style="display:block;font-size:12px;">Daily check-in</b>
-        <div class="progressWrap">
-          <div class="progressFill" id="pCheckFill"></div>
-        </div>
+        <div class="progressWrap"><div class="progressFill" id="pCheckFill"></div></div>
         <div class="mutedSmall" id="pCheckText">0/5</div>
       </div>
 
       <div class="row" style="margin-top:12px;">
-        <button class="btn secondary" id="pToTasksBtn">Открыть задания</button>
-        <button class="btn" id="pCheckinBtn">Check-in</button>
+        <button class="btn secondary" id="goTasksBtn">Открыть задания</button>
+        <button class="btn" id="pCheckBtn">Check-in</button>
       </div>
     </div>
   </div>
 
   <script>
-    const tg = window.Telegram?.WebApp;
-    if (tg) tg.expand();
-
-    // ===== Storage keys
-    const LS_FIRST = "tss_first_visit";
-    const LS_CART  = "tss_cart_v1";
-    const LS_CK_LAST = "tss_checkin_last";
-    const LS_CK_PROG = "tss_checkin_prog"; // 0..4 stored, displayed +1 when checked today? we do straightforward 0..5
-
-    // ===== Helpers
-    const pad2 = (n) => String(n).padStart(2,"0");
-    const todayStr = () => {
-      const d = new Date();
-      return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
-    };
-    const dateToHuman = (s) => {
-      // yyyy-mm-dd -> dd.mm.yyyy
-      if (!s) return "—";
-      const [y,m,d] = s.split("-");
-      return `${d}.${m}.${y}`;
-    };
-    const yesterdayStr = () => {
-      const d = new Date();
-      d.setDate(d.getDate()-1);
-      return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
-    };
-    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-
-    function parsePrice(optionText){
-      // tries $number
-      const m = (optionText || "").match(/\$([0-9]+(?:\.[0-9]+)?)/);
-      return m ? Number(m[1]) : null;
-    }
-
-    function safeJSONParse(s, fallback){
-      try{ return JSON.parse(s); } catch(e){ return fallback; }
-    }
-
-    // ===== First visit
-    const firstVisit = localStorage.getItem(LS_FIRST) || (() => {
-      const t = todayStr();
-      localStorage.setItem(LS_FIRST, t);
-      return t;
-    })();
-
-    // ===== Random splash duration 4..8 sec
-    const splash = document.getElementById("splash");
-    const dur = (Math.floor(Math.random() * 5) + 4); // 4..8
-    if (splash) splash.style.setProperty("--loadDur", dur + "s");
-    const SPLASH_MS = dur * 1000;
-
-    // ===== Starfield (more, brighter)
-    (function makeStars(){
-      const wrap = document.getElementById("starfield");
-      if (!wrap) return;
-      const count = 180; // много
-      for (let i=0;i<count;i++){
-        const s = document.createElement("span");
-        s.className = "star";
-        const x = Math.random()*100;
-        const y = Math.random()*100;
-        const size = (Math.random()<0.12) ? (2.4 + Math.random()*1.8) : (1.2 + Math.random()*1.2);
-        const tw = (1.6 + Math.random()*2.8).toFixed(2) + "s";
-        s.style.left = x + "%";
-        s.style.top = y + "%";
-        s.style.width = size + "px";
-        s.style.height = size + "px";
-        s.style.setProperty("--tw", tw);
-        wrap.appendChild(s);
+    (function(){
+      const dbg = document.getElementById("dbg");
+      function showErr(msg){
+        dbg.style.display = "block";
+        dbg.textContent = "JS ERROR:\n" + msg;
       }
-    })();
+      window.addEventListener("error", (e)=> showErr(e.message + (e.lineno ? `\nline: ${e.lineno}` : "")));
+      window.addEventListener("unhandledrejection", (e)=> showErr(String(e.reason || e)));
 
-    // ===== Random “game-like” loading phrases
-    const phrases = [
-      "Loading…",
-      "Загрузка…",
-      "Подгружаем данные…",
-      "Убираем пыль…",
-      "Стираем с доски…",
-      "Проверяем данные…",
-      "Обрабатываем комнату…",
-      "Проветриваем помещение…",
-      "Протираем окно…",
-      "Взвешиваем кота…",
-      "Строим комнату…",
-      "Заряжаем неон…",
-      "Калибруем градиенты…",
-      "Включаем магию Web3…",
-      "Ставим всё по пикселям…",
-      "Запускаем секретный режим…"
-    ];
-    const sHint = document.getElementById("sHint");
-    if (sHint) sHint.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+      // --- Telegram
+      const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+      try{ tg && tg.expand(); }catch(_){}
 
-    setTimeout(() => {
-      const s = document.getElementById("splash");
-      if (!s) return;
-      s.classList.add("fadeOut");
-      setTimeout(()=> s.style.display="none", 600);
-    }, SPLASH_MS);
+      // --- constants
+      const TARGET_USER = "Rapgospod";
 
-    // ===== Greeting + user info
-    const u = tg?.initDataUnsafe?.user;
-    const firstName = u?.first_name || "User";
-    const userName = u?.username ? ("@" + u.username) : "";
-    const initials = (firstName || "U").slice(0,1).toUpperCase();
+      const LS_FIRST = "tss_first_visit";
+      const LS_CART  = "tss_cart_v2";
+      const LS_CK_LAST = "tss_checkin_last";
+      const LS_CK_PROG = "tss_checkin_prog";
 
-    // Keep subtitle: order your future (you requested)
-    // If you want greeting elsewhere later — we can add it.
-
-    // ===== Tabs
-    const tabs = Array.from(document.querySelectorAll(".tab"));
-    const screens = {
-      services: document.getElementById("services"),
-      portfolio: document.getElementById("portfolio"),
-      order: document.getElementById("order"),
-    };
-    function setTab(name){
-      tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
-      Object.entries(screens).forEach(([k, el]) => el.classList.toggle("active", k === name));
-      try { tg?.HapticFeedback?.impactOccurred("light"); } catch(e){}
-    }
-    tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
-
-    // ===== Order sub-tabs
-    const subTabs = Array.from(document.querySelectorAll(".subTab"));
-    const subScreens = {
-      orderMain: document.getElementById("orderMain"),
-      tasks: document.getElementById("tasks")
-    };
-    function setSub(name){
-      subTabs.forEach(b => b.classList.toggle("active", b.dataset.sub === name));
-      Object.entries(subScreens).forEach(([k, el]) => el.classList.toggle("active", k === name));
-    }
-    subTabs.forEach(b => b.addEventListener("click", () => setSub(b.dataset.sub)));
-
-    // ===== Cart
-    let cart = safeJSONParse(localStorage.getItem(LS_CART), []);
-    function saveCart(){
-      localStorage.setItem(LS_CART, JSON.stringify(cart));
-    }
-    function cartCount(){
-      return cart.reduce((a, it) => a + (it.qty || 0), 0);
-    }
-    function cartTotal(){
-      // if any item has null price => total is partial, we still sum known
-      return cart.reduce((a, it) => a + ((it.price ?? 0) * it.qty), 0);
-    }
-    function hasTBD(){
-      return cart.some(it => it.price === null);
-    }
-    function addToCart(service, option, qty){
-      const price = parsePrice(option); // number or null
-      const key = service + "||" + option;
-      const idx = cart.findIndex(x => x.key === key);
-      if (idx >= 0){
-        cart[idx].qty += qty;
-      } else {
-        cart.push({ key, service, option, qty, price });
-      }
-      saveCart();
-      renderCart();
-      try { tg?.HapticFeedback?.impactOccurred("light"); } catch(e){}
-    }
-    function removeItem(key){
-      cart = cart.filter(x => x.key !== key);
-      saveCart();
-      renderCart();
-    }
-    function clearCart(){
-      cart = [];
-      saveCart();
-      renderCart();
-    }
-
-    const cartList = document.getElementById("cartList");
-    const cartTotalEl = document.getElementById("cartTotal");
-    const cartCountEl = document.getElementById("cartCount");
-    const cartHintEl = document.getElementById("cartHint");
-
-    function renderCart(){
-      cartCountEl.textContent = `${cartCount()} items`;
-      cartList.innerHTML = "";
-
-      if (cart.length === 0){
-        cartHintEl.textContent = "Пока пусто. Добавь услуги — и можно “Заказать”.";
-      } else {
-        cartHintEl.textContent = hasTBD()
-          ? "Есть позиции с индивидуальной ценой (TBD)."
-          : "Готово. Можно отправлять заказ.";
-      }
-
-      cart.forEach(it => {
-        const div = document.createElement("div");
-        div.className = "cartItem";
-        const priceText = (it.price === null) ? "TBD" : `$${it.price}`;
-        div.innerHTML = `
-          <div style="min-width:0;">
-            <b>${it.service} × ${it.qty}</b>
-            <span>${it.option} • ${priceText}</span>
-          </div>
-          <button class="miniBtn danger" data-del="${it.key}">Удалить</button>
-        `;
-        cartList.appendChild(div);
-      });
-
-      const t = cartTotal();
-      cartTotalEl.textContent = `$${t.toFixed(2)}`;
-      cartList.querySelectorAll("[data-del]").forEach(btn => {
-        btn.addEventListener("click", () => removeItem(btn.dataset.del));
-      });
-    }
-    renderCart();
-
-    document.getElementById("clearCartBtn").addEventListener("click", clearCart);
-
-    // ===== Qty handlers per service card
-    document.querySelectorAll(".card[data-service]").forEach(card => {
-      const qtyEl = card.querySelector("[data-qty]");
-      const minus = card.querySelector("[data-qty-minus]");
-      const plus = card.querySelector("[data-qty-plus]");
-      const addBtn = card.querySelector("[data-add]");
-      const orderBtn = card.querySelector("[data-order]");
-
-      const getQty = () => Number(qtyEl.textContent || "1");
-      const setQty = (v) => qtyEl.textContent = String(clamp(v, 1, 99));
-
-      minus.addEventListener("click", (e)=>{ e.preventDefault(); setQty(getQty()-1); });
-      plus.addEventListener("click", (e)=>{ e.preventDefault(); setQty(getQty()+1); });
-
-      // option select
-      const optWrap = card.querySelector("[data-options]");
-      const opts = Array.from(optWrap.querySelectorAll(".opt"));
-      opts.forEach(btn => btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        opts.forEach(o => o.classList.remove("active"));
-        btn.classList.add("active");
-      }));
-
-      addBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const service = card.dataset.service;
-        const activeOpt = card.querySelector(".opt.active");
-        const optionText = activeOpt?.dataset?.opt || "Custom";
-        addToCart(service, optionText, getQty());
-      });
-
-      // order single card
-      const handler = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const service = card.dataset.service;
-        const activeOpt = card.querySelector(".opt.active");
-        const optionText = activeOpt?.dataset?.opt || "Custom";
-        const qty = getQty();
-        // make temp order including just this item (not touching cart)
-        openChatWithText(TARGET_USER, buildOrderTextFromItems([{service, option: optionText, qty, price: parsePrice(optionText)}]));
+      const pad2 = (n)=> String(n).padStart(2,"0");
+      const todayStr = ()=>{
+        const d=new Date();
+        return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
       };
-      orderBtn.addEventListener("click", handler);
-      orderBtn.addEventListener("pointerup", handler);
-      orderBtn.addEventListener("touchend", handler);
-    });
+      const yesterdayStr = ()=>{
+        const d=new Date(); d.setDate(d.getDate()-1);
+        return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+      };
+      const dateToHuman = (s)=>{
+        if(!s) return "—";
+        const [y,m,d]=s.split("-");
+        return `${d}.${m}.${y}`;
+      };
 
-    // ===== Open order from cart
-    document.getElementById("orderFromCartBtn").addEventListener("click", () => {
-      if (cart.length === 0){
-        alert("Корзина пустая 🙂");
-        return;
-      }
-      openChatWithText(TARGET_USER, buildOrderTextFromItems(cart));
-    });
+      // --- first visit
+      let firstVisit = localStorage.getItem(LS_FIRST);
+      if(!firstVisit){ firstVisit = todayStr(); localStorage.setItem(LS_FIRST, firstVisit); }
 
-    // ===== Send order to @Rapgospod
-    const TARGET_USER = "Rapgospod"; // без @
-    function openChatWithText(username, text){
-      const url = "https://t.me/" + username + "?text=" + encodeURIComponent(text);
-      try{
-        if (tg?.openTelegramLink) tg.openTelegramLink(url);
-        else window.location.href = url;
-      }catch(e){
-        window.location.href = url;
-      }
-    }
-
-    function buildOrderTextFromItems(items){
-      // removed Style/refs and Qty/format as requested
-      const header = [
-        "🛒 Ton Secret Shop — new order",
-        `User: ${firstName}${userName ? " " + userName : ""}`,
-        `First visit: ${dateToHuman(firstVisit)}`
+      // --- splash: ALWAYS hide fallback
+      const splash = document.getElementById("splash");
+      const dur = (Math.floor(Math.random()*5)+4);
+      splash.style.setProperty("--loadDur", dur+"s");
+      const phrases = [
+        "Loading…","Загрузка…","Подгружаем данные…","Убираем пыль…","Стираем с доски…",
+        "Проверяем данные…","Обрабатываем комнату…","Проветриваем помещение…","Протираем окно…",
+        "Взвешиваем кота…","Строим комнату…","Заряжаем неон…","Калибруем градиенты…",
+        "Ставим всё по пикселям…","Запускаем секретный режим…"
       ];
+      document.getElementById("sHint").textContent = phrases[Math.floor(Math.random()*phrases.length)];
 
-      const lines = ["", "Items:"];
-      items.forEach((it, idx) => {
-        const price = (it.price === null || it.price === undefined) ? "TBD" : `$${it.price}`;
-        lines.push(`${idx+1}) ${it.service} × ${it.qty} — ${it.option} (${price})`);
+      // stars (bright & many)
+      const starWrap = document.getElementById("starfield");
+      const starCount = 200;
+      for(let i=0;i<starCount;i++){
+        const s=document.createElement("span");
+        s.className="star";
+        const x=Math.random()*100, y=Math.random()*100;
+        const big = Math.random()<0.16;
+        const size = big ? (2.6 + Math.random()*2.0) : (1.3 + Math.random()*1.4);
+        s.style.left=x+"%"; s.style.top=y+"%";
+        s.style.width=size+"px"; s.style.height=size+"px";
+        s.style.setProperty("--tw", (1.5+Math.random()*2.8).toFixed(2)+"s");
+        starWrap.appendChild(s);
+      }
+
+      function hideSplash(){
+        if(!splash || splash.dataset.hidden==="1") return;
+        splash.dataset.hidden="1";
+        splash.classList.add("fadeOut");
+        setTimeout(()=>{ splash.style.display="none"; }, 650);
+      }
+      setTimeout(hideSplash, dur*1000);
+      setTimeout(hideSplash, 9000); // hard fallback
+
+      // --- tab system
+      const screens = {
+        services: document.getElementById("services"),
+        portfolio: document.getElementById("portfolio"),
+        order: document.getElementById("order")
+      };
+      document.querySelectorAll(".tab").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const name = btn.dataset.tab;
+          document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active", x===btn));
+          Object.keys(screens).forEach(k=>screens[k].classList.toggle("active", k===name));
+          try{ tg && tg.HapticFeedback && tg.HapticFeedback.impactOccurred("light"); }catch(_){}
+        });
       });
 
-      const total = items.reduce((a, it)=> a + ((it.price ?? 0) * it.qty), 0);
-      lines.push("");
-      lines.push(`Total (known): $${total.toFixed(2)}`);
-      if (items.some(it => it.price === null)) lines.push("Note: Some items have индивидуальная цена (TBD).");
-      lines.push("");
-      lines.push("Deadline: ");
-      lines.push("Budget: ");
-
-      return header.concat(lines).join("\n");
-    }
-
-    // ===== Copy template / open chat buttons
-    document.getElementById("openMeBtn").addEventListener("click", () => {
-      openChatWithText(TARGET_USER, buildOrderTextFromItems(cart.length ? cart : [{service:"…", option:"…", qty:1, price:null}]));
-    });
-
-    document.getElementById("copyTemplateBtn").addEventListener("click", async () => {
-      const template = buildOrderTextFromItems(cart.length ? cart : [{service:"…", option:"…", qty:1, price:null}]);
-      try{
-        await navigator.clipboard.writeText(template);
-        alert("Скопировано ✅");
-      }catch(e){
-        alert("Не удалось скопировать. Скопируй вручную:\n\n" + template);
+      // --- order sub tabs
+      const subScreens = {
+        orderMain: document.getElementById("orderMain"),
+        tasks: document.getElementById("tasks")
+      };
+      function setSub(name){
+        document.querySelectorAll(".subTab").forEach(b=>b.classList.toggle("active", b.dataset.sub===name));
+        Object.keys(subScreens).forEach(k=>subScreens[k].classList.toggle("active", k===name));
       }
-    });
+      document.querySelectorAll(".subTab").forEach(b=>b.addEventListener("click", ()=> setSub(b.dataset.sub)));
 
-    // ===== Portfolio modal
-    const workBackdrop = document.getElementById("workBackdrop");
-    const mTitle = document.getElementById("mTitle");
-    const mDesc = document.getElementById("mDesc");
-    const mImg = document.getElementById("mImg");
-    const mLinkWrap = document.getElementById("mLinkWrap");
-    const mLink = document.getElementById("mLink");
-
-    function openWorkModal(title, desc, link, epImg){
-      mTitle.textContent = title || "Work";
-      mDesc.textContent = desc || "";
-
-      if (epImg && epImg.trim()){
-        mImg.style.display = "block";
-        mImg.src = epImg;
-      } else {
-        mImg.style.display = "none";
-        mImg.src = "";
+      // --- cart
+      function safeParse(s, fallback){ try{return JSON.parse(s);}catch(_){return fallback;} }
+      let cart = safeParse(localStorage.getItem(LS_CART), []);
+      function saveCart(){ localStorage.setItem(LS_CART, JSON.stringify(cart)); }
+      function parsePrice(optionText){
+        const m = String(optionText||"").match(/\$([0-9]+(?:\.[0-9]+)?)/);
+        return m ? Number(m[1]) : null;
       }
+      function cartCount(){ return cart.reduce((a,it)=>a+(it.qty||0),0); }
+      function cartTotal(){ return cart.reduce((a,it)=>a+((it.price??0)*it.qty),0); }
+      function hasTBD(){ return cart.some(it=>it.price===null); }
 
-      if (link && link.trim()){
-        mLinkWrap.style.display = "block";
-        mLink.href = link;
-      } else {
-        mLinkWrap.style.display = "none";
-      }
+      const cartList = document.getElementById("cartList");
+      const cartTotalEl = document.getElementById("cartTotal");
+      const cartCountEl = document.getElementById("cartCount");
+      const cartHintEl = document.getElementById("cartHint");
 
-      workBackdrop.style.display = "flex";
-      requestAnimationFrame(() => {
-        workBackdrop.classList.add("show");
-        document.querySelector(".wrap")?.classList.add("modalOpen");
-      });
-
-      try { tg?.HapticFeedback?.impactOccurred("light"); } catch(e){}
-    }
-
-    function closeWorkModal(){
-      workBackdrop.classList.remove("show");
-      document.querySelector(".wrap")?.classList.remove("modalOpen");
-      setTimeout(() => { workBackdrop.style.display = "none"; }, 280);
-    }
-
-    document.getElementById("mClose").addEventListener("click", closeWorkModal);
-    workBackdrop.addEventListener("click", (e) => { if (e.target === workBackdrop) closeWorkModal(); });
-
-    document.querySelectorAll(".work").forEach(tile => {
-      tile.addEventListener("click", () => {
-        openWorkModal(tile.dataset.workTitle, tile.dataset.workDesc, tile.dataset.workLink, tile.dataset.epImg);
-      });
-    });
-
-    // ===== Check-in system (5-day streak, once/day)
-    function loadCheckState(){
-      const last = localStorage.getItem(LS_CK_LAST) || "";
-      const prog = Number(localStorage.getItem(LS_CK_PROG) || "0"); // 0..5
-      return { last, prog };
-    }
-    function saveCheckState(last, prog){
-      localStorage.setItem(LS_CK_LAST, last);
-      localStorage.setItem(LS_CK_PROG, String(prog));
-    }
-
-    function normalizeCheckState(){
-      // if missed day -> reset to 0 (unless last is today or yesterday)
-      const { last, prog } = loadCheckState();
-      const today = todayStr();
-      const yest = yesterdayStr();
-
-      if (!last){
-        saveCheckState("", 0);
-        return;
-      }
-      if (last === today || last === yest){
-        // ok keep
-        return;
-      }
-      // missed >1 day
-      saveCheckState("", 0);
-    }
-
-    function checkinCanDo(){
-      normalizeCheckState();
-      const { last } = loadCheckState();
-      const today = todayStr();
-      return last !== today;
-    }
-
-    function doCheckin(){
-      normalizeCheckState();
-      const today = todayStr();
-      const yest = yesterdayStr();
-      let { last, prog } = loadCheckState();
-
-      if (last === today){
-        return { ok:false, msg:"Уже сделано сегодня." };
-      }
-
-      if (!last){
-        prog = 1;
-      } else if (last === yest){
-        prog = prog + 1;
-      } else {
-        // should not happen because normalize resets, but keep safe
-        prog = 1;
-      }
-
-      if (prog >= 5){
-        // reward -> reset cycle after completing
-        saveCheckState(today, 0);
-        return { ok:true, completed:true, msg:"5/5 ✅ Секретный бонус получен! Цикл начался заново." };
-      } else {
-        saveCheckState(today, prog);
-        return { ok:true, completed:false, msg:`Чек-ин принят ✅ Прогресс: ${prog}/5` };
-      }
-    }
-
-    const checkinFill = document.getElementById("checkinFill");
-    const checkinText = document.getElementById("checkinText");
-    const checkinStatus = document.getElementById("checkinStatus");
-    const pCheckFill = document.getElementById("pCheckFill");
-    const pCheckText = document.getElementById("pCheckText");
-
-    function renderCheckin(){
-      normalizeCheckState();
-      const today = todayStr();
-      const { last, prog } = loadCheckState();
-
-      // prog is 0..4 after completion reset, but we display prog/5 (unless completed today -> stored 0)
-      const shown = prog; // 0..4
-      const pct = (shown / 5) * 100;
-
-      if (checkinFill) checkinFill.style.width = pct + "%";
-      if (checkinText) checkinText.textContent = `${shown}/5`;
-
-      if (pCheckFill) pCheckFill.style.width = pct + "%";
-      if (pCheckText) pCheckText.textContent = `${shown}/5`;
-
-      if (checkinStatus){
-        if (last === today){
-          checkinStatus.textContent = "Сегодня уже отмечено ✅";
-          checkinStatus.style.color = "rgba(241,241,255,.65)";
+      function renderCart(){
+        cartCountEl.textContent = `${cartCount()} items`;
+        cartList.innerHTML = "";
+        if(cart.length===0){
+          cartHintEl.textContent = "Пока пусто.";
         } else {
-          checkinStatus.textContent = "Можно сделать чек-ин сегодня.";
-          checkinStatus.style.color = "rgba(241,241,255,.75)";
+          cartHintEl.textContent = hasTBD() ? "Есть позиции с индивидуальной ценой (TBD)." : "Готово к заказу.";
+        }
+        cart.forEach(it=>{
+          const div=document.createElement("div");
+          div.className="cartItem";
+          const priceText = it.price===null ? "TBD" : `$${it.price}`;
+          div.innerHTML = `
+            <div style="min-width:0;">
+              <b>${it.service} × ${it.qty}</b>
+              <span>${it.option} • ${priceText}</span>
+            </div>
+            <button class="miniBtn danger" data-del="${it.key}">Удалить</button>
+          `;
+          cartList.appendChild(div);
+        });
+        cartTotalEl.textContent = `$${cartTotal().toFixed(2)}`;
+        cartList.querySelectorAll("[data-del]").forEach(btn=>{
+          btn.addEventListener("click", ()=>{
+            cart = cart.filter(x=>x.key!==btn.dataset.del);
+            saveCart(); renderCart();
+          });
+        });
+      }
+      renderCart();
+
+      document.getElementById("clearCartBtn").addEventListener("click", ()=>{
+        cart=[]; saveCart(); renderCart();
+      });
+
+      function addToCart(service, option, qty){
+        const price = parsePrice(option);
+        const key = service + "||" + option;
+        const idx = cart.findIndex(x=>x.key===key);
+        if(idx>=0) cart[idx].qty += qty;
+        else cart.push({key, service, option, qty, price});
+        saveCart(); renderCart();
+      }
+
+      // --- build message
+      const u = tg && tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
+      const firstName = (u && u.first_name) ? u.first_name : "User";
+      const userName = (u && u.username) ? ("@" + u.username) : "";
+
+      function buildOrderText(items){
+        const header = [
+          "🛒 Ton Secret Shop — new order",
+          `User: ${firstName}${userName ? " "+userName : ""}`,
+          `First visit: ${dateToHuman(firstVisit)}`
+        ];
+        const lines = ["", "Items:"];
+        items.forEach((it, idx)=>{
+          const price = (it.price===null || it.price===undefined) ? "TBD" : `$${it.price}`;
+          lines.push(`${idx+1}) ${it.service} × ${it.qty} — ${it.option} (${price})`);
+        });
+        const total = items.reduce((a,it)=>a+((it.price??0)*it.qty),0);
+        lines.push("");
+        lines.push(`Total (known): $${total.toFixed(2)}`);
+        if(items.some(it=>it.price===null)) lines.push("Note: Some items have индивидуальная цена (TBD).");
+        lines.push("");
+        lines.push("Deadline: ");
+        lines.push("Budget: ");
+        return header.concat(lines).join("\n");
+      }
+
+      function openChat(text){
+        const url = "https://t.me/" + TARGET_USER + "?text=" + encodeURIComponent(text);
+        try{
+          if(tg && tg.openTelegramLink) tg.openTelegramLink(url);
+          else window.location.href = url;
+        }catch(_){ window.location.href = url; }
+      }
+
+      document.getElementById("orderFromCartBtn").addEventListener("click", ()=>{
+        if(cart.length===0){ alert("Корзина пустая 🙂"); return; }
+        openChat(buildOrderText(cart));
+      });
+      document.getElementById("openChatBtn").addEventListener("click", ()=>{
+        openChat(buildOrderText(cart.length?cart:[{service:"…",option:"…",qty:1,price:null}]));
+      });
+      document.getElementById("copyBtn").addEventListener("click", async ()=>{
+        const t = buildOrderText(cart.length?cart:[{service:"…",option:"…",qty:1,price:null}]);
+        try{ await navigator.clipboard.writeText(t); alert("Скопировано ✅"); }
+        catch(_){ alert("Не удалось скопировать. Скопируй вручную:\n\n"+t); }
+      });
+
+      // --- Service cards (event delegation — крепче)
+      function clamp(v,a,b){ return Math.max(a, Math.min(b,v)); }
+
+      document.querySelectorAll(".serviceCard").forEach(card=>{
+        // option buttons
+        card.querySelectorAll(".opt").forEach(opt=>{
+          opt.addEventListener("click", ()=>{
+            card.querySelectorAll(".opt").forEach(o=>o.classList.remove("active"));
+            opt.classList.add("active");
+          });
+        });
+
+        card.addEventListener("click", (e)=>{
+          const actBtn = e.target.closest("[data-act]");
+          if(!actBtn) return;
+          const act = actBtn.dataset.act;
+          const qtyEl = card.querySelector("[data-qty]");
+          let qty = Number(qtyEl.textContent || "1");
+          if(act==="minus"){ qtyEl.textContent = String(clamp(qty-1,1,99)); return; }
+          if(act==="plus"){ qtyEl.textContent = String(clamp(qty+1,1,99)); return; }
+
+          const service = card.dataset.service;
+          const opt = card.querySelector(".opt.active");
+          const option = opt ? opt.dataset.opt : "Custom";
+          qty = Number(qtyEl.textContent || "1");
+
+          if(act==="add"){
+            addToCart(service, option, qty);
+            try{ tg && tg.HapticFeedback && tg.HapticFeedback.impactOccurred("light"); }catch(_){}
+            return;
+          }
+          if(act==="order"){
+            const item = { service, option, qty, price: parsePrice(option) };
+            openChat(buildOrderText([item]));
+            return;
+          }
+        });
+      });
+
+      // --- Portfolio modal
+      const workBackdrop = document.getElementById("workBackdrop");
+      const wTitle = document.getElementById("wTitle");
+      const wImg = document.getElementById("wImg");
+      const wDesc = document.getElementById("wDesc");
+      function openWork(tile){
+        wTitle.textContent = tile.dataset.title || "Work";
+        wDesc.textContent = tile.dataset.desc || "";
+        const ep = tile.dataset.ep || "";
+        wImg.style.display = ep ? "block" : "none";
+        wImg.src = ep;
+        workBackdrop.classList.add("show");
+        document.getElementById("app").classList.add("modalOpen");
+      }
+      function closeWork(){
+        workBackdrop.classList.remove("show");
+        document.getElementById("app").classList.remove("modalOpen");
+      }
+      document.getElementById("wClose").addEventListener("click", closeWork);
+      workBackdrop.addEventListener("click", (e)=>{ if(e.target===workBackdrop) closeWork(); });
+
+      document.querySelectorAll(".work").forEach(tile=>{
+        tile.addEventListener("click", ()=> openWork(tile));
+      });
+
+      // --- Check-in (real)
+      function loadCheck(){
+        return {
+          last: localStorage.getItem(LS_CK_LAST) || "",
+          prog: Number(localStorage.getItem(LS_CK_PROG) || "0") // 0..4 (after complete resets)
+        };
+      }
+      function saveCheck(last, prog){
+        localStorage.setItem(LS_CK_LAST, last);
+        localStorage.setItem(LS_CK_PROG, String(prog));
+      }
+      function normalizeCheck(){
+        const st = loadCheck();
+        if(!st.last) return st;
+        const t = todayStr();
+        const y = yesterdayStr();
+        if(st.last===t || st.last===y) return st;
+        saveCheck("", 0);
+        return { last:"", prog:0 };
+      }
+      function doCheck(){
+        let st = normalizeCheck();
+        const t = todayStr();
+        const y = yesterdayStr();
+
+        if(st.last===t) return { ok:false, msg:"Уже отмечено сегодня ✅" };
+
+        let next = 1;
+        if(st.last===y) next = st.prog + 1;
+
+        if(next>=5){
+          // completed -> reset cycle (store last=today to prevent re-check same day)
+          saveCheck(t, 0);
+          return { ok:true, done:true, msg:"5/5 ✅ Бонус получен! Цикл начался заново." };
+        }else{
+          saveCheck(t, next);
+          return { ok:true, done:false, msg:`Чек-ин принят ✅ ${next}/5` };
         }
       }
-    }
-    renderCheckin();
+      const checkFill = document.getElementById("checkFill");
+      const checkText = document.getElementById("checkText");
+      const checkStatus = document.getElementById("checkStatus");
+      const pCheckFill = document.getElementById("pCheckFill");
+      const pCheckText = document.getElementById("pCheckText");
 
-    document.getElementById("checkinBtn").addEventListener("click", () => {
-      const r = doCheckin();
-      renderCheckin();
-      alert(r.msg);
-    });
+      function renderCheck(){
+        const st = normalizeCheck();
+        const t = todayStr();
+        const pct = (st.prog/5)*100;
+        checkFill.style.width = pct + "%";
+        checkText.textContent = `${st.prog}/5`;
+        pCheckFill.style.width = pct + "%";
+        pCheckText.textContent = `${st.prog}/5`;
+        checkStatus.textContent = (st.last===t) ? "Сегодня уже отмечено ✅" : "Можно сделать чек-ин сегодня.";
+      }
+      renderCheck();
 
-    // Task 1: subscribe
-    document.getElementById("taskSubBtn").addEventListener("click", () => {
-      const url = "https://t.me/TonSecretShop";
-      try{
-        if (tg?.openTelegramLink) tg.openTelegramLink(url);
-        else window.location.href = url;
-      }catch(e){ window.location.href = url; }
-    });
-
-    // ===== Profile modal
-    const profileBackdrop = document.getElementById("profileBackdrop");
-    const profileBtn = document.getElementById("profileBtn");
-
-    const pAvatar = document.getElementById("pAvatar");
-    const pName = document.getElementById("pName");
-    const pUser = document.getElementById("pUser");
-    const pFirstVisit = document.getElementById("pFirstVisit");
-
-    function openProfile(){
-      // fill user UI
-      pAvatar.textContent = initials;
-      pName.textContent = firstName;
-      pUser.textContent = userName || "Telegram user";
-      pFirstVisit.textContent = "First visit: " + dateToHuman(firstVisit);
-
-      profileBackdrop.style.display = "flex";
-      requestAnimationFrame(() => {
-        profileBackdrop.classList.add("show");
-        document.querySelector(".wrap")?.classList.add("modalOpen");
+      document.getElementById("checkBtn").addEventListener("click", ()=>{
+        const r = doCheck();
+        renderCheck();
+        alert(r.msg);
       });
-      renderCheckin();
-    }
-    function closeProfile(){
-      profileBackdrop.classList.remove("show");
-      document.querySelector(".wrap")?.classList.remove("modalOpen");
-      setTimeout(() => { profileBackdrop.style.display = "none"; }, 280);
-    }
 
-    profileBtn.addEventListener("click", openProfile);
-    document.getElementById("pClose").addEventListener("click", closeProfile);
-    profileBackdrop.addEventListener("click", (e) => { if (e.target === profileBackdrop) closeProfile(); });
+      // --- Tasks: open channel
+      document.getElementById("openChannelBtn").addEventListener("click", ()=>{
+        const url = "https://t.me/TonSecretShop";
+        try{ if(tg && tg.openTelegramLink) tg.openTelegramLink(url); else window.location.href = url; }
+        catch(_){ window.location.href = url; }
+      });
 
-    // profile check-in button
-    document.getElementById("pCheckinBtn").addEventListener("click", () => {
-      const r = doCheckin();
-      renderCheckin();
-      alert(r.msg);
-    });
+      // --- Profile modal
+      const profileBackdrop = document.getElementById("profileBackdrop");
+      const pAvatar = document.getElementById("pAvatar");
+      const pName = document.getElementById("pName");
+      const pUser = document.getElementById("pUser");
+      const pFirst = document.getElementById("pFirst");
+      const initials = (firstName || "U").slice(0,1).toUpperCase();
 
-    // profile -> tasks shortcut
-    document.getElementById("pToTasksBtn").addEventListener("click", () => {
-      closeProfile();
-      setTab("order");
-      setSub("tasks");
-    });
+      function openProfile(){
+        pAvatar.textContent = initials;
+        pName.textContent = firstName;
+        pUser.textContent = userName || "Telegram user";
+        pFirst.textContent = "First visit: " + dateToHuman(firstVisit);
+        profileBackdrop.classList.add("show");
+        document.getElementById("app").classList.add("modalOpen");
+        renderCheck();
+      }
+      function closeProfile(){
+        profileBackdrop.classList.remove("show");
+        document.getElementById("app").classList.remove("modalOpen");
+      }
+      document.getElementById("profileBtn").addEventListener("click", openProfile);
+      document.getElementById("pClose").addEventListener("click", closeProfile);
+      profileBackdrop.addEventListener("click", (e)=>{ if(e.target===profileBackdrop) closeProfile(); });
+
+      document.getElementById("pCheckBtn").addEventListener("click", ()=>{
+        const r = doCheck();
+        renderCheck();
+        alert(r.msg);
+      });
+      document.getElementById("goTasksBtn").addEventListener("click", ()=>{
+        closeProfile();
+        // go to order/tasks
+        document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab==="order"));
+        Object.keys(screens).forEach(k=>screens[k].classList.toggle("active", k==="order"));
+        setSub("tasks");
+      });
+
+    })();
   </script>
 </body>
 </html>
